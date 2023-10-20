@@ -41,5 +41,5 @@ Thumbs.db
 # zip files
 dist.zip
 
-
 /.firebase
+package-lock.json
