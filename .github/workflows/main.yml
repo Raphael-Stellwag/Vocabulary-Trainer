@@ -32,8 +32,8 @@ jobs:
           git push
           git push --tags
       - name: build prod version
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        # env:
+        #   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: |
           npm install
           npm install @angular/cli
@@ -41,6 +41,11 @@ jobs:
 
           npm run sw-build
           # ng build --prod
-          firebase login --token "$FIREBASE_TOKEN"
-          ng deploy
+          # firebase login --token "$FIREBASE_TOKEN"
+          # ng deploy
+      - uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           
