@@ -44,7 +44,7 @@ export class VocabularyRestService {
             reject(err)
           });
         } else {
-          resolve();
+          resolve(""); //TODO: Fix ""
         }
       }, err => {
         console.log(err);

@@ -30,6 +30,15 @@ export class InitDbService {
    * @memberof IdbService
    */
   private initDatabase() {
+
+    var dbNewlyCreated = this.connection.initDb(this.getDatabase());
+    console.info(dbNewlyCreated);
+
+    // initiate jsstore connection
+    //var connection = new JsStore.Connection();
+    //var isDbCreated
+
+    /*
     this.connection.isDbExist(this.dbName).then(isExist => {
       if (isExist) {
         this.connection.openDb(this.dbName);
@@ -41,6 +50,7 @@ export class InitDbService {
       // this will be fired when indexedDB is not supported.
       alert(err.message);
     });
+    */
   }
 
   private getDatabase() {

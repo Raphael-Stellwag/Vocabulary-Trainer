@@ -56,11 +56,11 @@ export class VocabularyDbService {
     return this.dbFunctions.getClases();
   }
 
-  getUnits(clas: String) {
+  getUnits(clas: string) {
     return this.dbFunctions.getUnits(clas);
   }
 
-  getVocabularybyId(id: Number): Promise<unknown[]> {
+  getVocabularybyId(id: number): Promise<unknown[]> {
     return this.dbFunctions.getVocabularybyId(id);
   }
 

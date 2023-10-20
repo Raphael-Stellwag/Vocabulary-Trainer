@@ -32,12 +32,12 @@ export class DbFunctionService extends InitDbService {
     return this.connection.select({ from: this.tableName, groupBy: this.colClas, order: {by: this.colClas, type: "asc", idbSorting: false}});
   }
 
-  getUnits(clas: String) {
-    return this.connection.select({from: this.tableName, where: {clas: clas}, groupBy: this.colUnit, order: {by: this.colUnit, type: "asc", idbSorting: false}})
+  getUnits(clas2: string): Promise<any> {
+    return this.connection.select({from: this.tableName, where: {clas: clas2}, groupBy: this.colUnit, order: {by: this.colUnit, type: "asc", idbSorting: false}});
   }
 
-  getVocabularybyId(id: Number) {
-    return this.connection.select({from: this.tableName, where: {id: id}})
+  getVocabularybyId(id2: number): Promise<any> {
+    return this.connection.select({from: this.tableName, where: {id: id2}});
   }
 
   getAllVocs(): Promise<any> {
