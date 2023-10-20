@@ -9,8 +9,8 @@ import { VocabularyDbService } from 'src/app/services/vocabulary-db.service';
   styleUrls: ['./dialog-change-choose-unit.component.css']
 })
 export class DialogChangeChooseUnitComponent {
-  clasOptions = [{}];
-  unitOptions = [{}];
+  clasOptions = [];
+  unitOptions = [];
   unitChoosen = false;
   clasChoosen = false;
   data: ChoosenUnit = {

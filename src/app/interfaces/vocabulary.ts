@@ -9,6 +9,14 @@ export interface IVocabulary {
     secondaryLanguage;
 }
 
+export interface UnitOption {
+    unit: string
+}
+  
+export interface ClasOption {
+    clas: string
+}
+
 export class Vocabulary implements IVocabulary{
     id;
     tries;
