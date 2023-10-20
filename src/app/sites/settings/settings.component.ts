@@ -5,8 +5,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { VarPrimaryLanguageComponent } from '../../frames/var-primary-language/var-primary-language.component';
 import { LocalStorageNamespace } from '../../services/local-storage.namespace';
 import { Vocabulary } from 'src/app/interfaces/vocabulary';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import {MatDialog } from '@angular/material/dialog';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import {MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogQueryChooseUnitComponent } from 'src/app/dialogs/dialog-query-choose-unit/dialog-query-choose-unit.component'
 import { LoadingSpinnerComponent } from 'src/app/frames/loading-spinner/loading-spinner.component';

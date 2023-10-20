@@ -1,8 +1,8 @@
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { VocabularyService } from 'src/app/services/vocabulary.service';
 import { Component, OnInit } from '@angular/core';
 
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { DialogChangeChooseUnitComponent } from '../../dialogs/dialog-change-choose-unit/dialog-change-choose-unit.component';
 import { Router } from '@angular/router';
 import { DialogQueryChooseUnitComponent } from 'src/app/dialogs/dialog-query-choose-unit/dialog-query-choose-unit.component';

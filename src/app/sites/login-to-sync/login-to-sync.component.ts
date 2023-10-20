@@ -8,7 +8,7 @@ import { Component, OnInit, ViewChildren } from '@angular/core';
 import { ComponentPortal} from '@angular/cdk/portal';
 import { LoadingSpinnerComponent } from 'src/app/frames/loading-spinner/loading-spinner.component';
 import { HttpErrorResponse } from '@angular/common/http';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { DialogErrorMessageComponent } from 'src/app/dialogs/dialog-error-message/dialog-error-message.component';
 import { DialogSuccessMessageComponent } from 'src/app/dialogs/dialog-success-message/dialog-success-message.component';
 import { VocabularyService } from 'src/app/services/vocabulary.service';

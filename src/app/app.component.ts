@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import {VocabularyRestService} from './services/vocabulary-rest.service';
 import { Router, RoutesRecognized, NavigationEnd } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { AuthService } from './services/auth.service';
 import { environment } from 'src/environments/environment';
 import { VocabularyService } from './services/vocabulary.service';

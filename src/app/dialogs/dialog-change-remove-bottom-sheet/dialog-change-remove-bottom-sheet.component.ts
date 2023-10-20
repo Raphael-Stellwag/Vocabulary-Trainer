@@ -1,8 +1,8 @@
 import { VocabularyService } from './../../services/vocabulary.service';
 import { Component, Inject } from '@angular/core';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
-import { MatSnackBar} from '@angular/material/snack-bar'
-import {MatDialog } from '@angular/material/dialog';
+import { MatLegacySnackBar as MatSnackBar} from '@angular/material/legacy-snack-bar'
+import {MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 
 import { DialogConfirmationComponent } from '../dialog-confirmation/dialog-confirmation.component';
 import { DialogEditVocabularyComponent } from '../dialog-edit-vocabulary/dialog-edit-vocabulary.component';
