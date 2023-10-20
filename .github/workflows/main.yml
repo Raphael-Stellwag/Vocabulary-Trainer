@@ -45,7 +45,7 @@ jobs:
           # ng deploy
       - uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting
+          args: deploy --project vokabel-trainer-9e341 --only hosting 
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           
