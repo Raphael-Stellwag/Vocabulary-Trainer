@@ -125,7 +125,6 @@
       }
     }
   },
-  "defaultProject": "ngVoc",
   "cli": {
     "analytics": false
   }
