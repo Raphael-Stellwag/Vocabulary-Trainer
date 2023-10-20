@@ -3,18 +3,19 @@
 <div style="width: 50%; float: left;">
   <span class="headerText">Settings</span>
 </div>
-
-        
+   
 <div style='clear: both;'>
 </div>
 
 <br>
+
 <div>
   <span class="buttonHeader">Primary Language</span>
   <div class="buttonOutline">
     <div class="buttonOutlineText"><app-var-primary-language #VarPrimaryLanguage [editable]="true"></app-var-primary-language></div>
   </div>
 </div>
+
 <br>
 <div>
   <span class="buttonHeader">Secondary Language</span>
@@ -22,6 +23,7 @@
     <div class="buttonOutlineText"><app-var-secondary-language #VarSecondaryLanguage [editable]="true"></app-var-secondary-language></div>
   </div>
 </div>
+
 <br>
 <div class="button" (click)="saveButtonPressed()" (keypress)="saveButtonPressed()" tabindex="0">
   <span class="buttonText">
@@ -29,6 +31,7 @@
   </span>
 </div>
 <br>
+
 <div class="button" >
   <div style="width: 50%; position: relative; float: left;" (click)="chooseFileToImport()">
     <span class="buttonText">
@@ -48,6 +51,7 @@
 </div>
 <br>
 
+<!-- TODO: Fix Auth Server
 <a routerLink="/settings/login" *ngIf="userId == null" style="text-decoration:none;">
   <div class="button">
     <span class="buttonText">
@@ -55,6 +59,7 @@
     </span>
   </div>
 </a>
+
 
 <div *ngIf="userId != null" >
   <span class="buttonHeader">Logged in as {{userId}}</span>
@@ -66,6 +71,8 @@
 
 </div>
 <br>
+-->
+
 <a routerLink="/settings/impressum" style="text-decoration:none;">
   <div class="button">
     <span class="buttonText">
@@ -73,7 +80,6 @@
     </span>
   </div>
 </a>
-
 
 <br>
 <div>

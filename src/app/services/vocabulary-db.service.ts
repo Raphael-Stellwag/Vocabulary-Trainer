@@ -1,6 +1,6 @@
 import { Action } from './../interfaces/action';
 import { Injectable } from '@angular/core';
-import { IVocabulary, Vocabulary } from '../interfaces/vocabulary';
+import { ClasOption, IVocabulary, UnitOption, Vocabulary } from '../interfaces/vocabulary';
 import { VocabularyRestService } from './vocabulary-rest.service';
 import { ActionMethod } from '../interfaces/action';
 import { DbFunctionService } from '../services/db-function.service';
@@ -52,15 +52,15 @@ export class VocabularyDbService {
     await this.dbFunctions.deleteVocabularyJustDb(voc);
   }
 
-  getClases() {
+  getClases(): Promise<ClasOption[]> {
     return this.dbFunctions.getClases();
   }
 
-  getUnits(clas: String) {
+  getUnits(clas: string): Promise<UnitOption[]> {
     return this.dbFunctions.getUnits(clas);
   }
 
-  getVocabularybyId(id: Number): Promise<unknown[]> {
+  getVocabularybyId(id: number): Promise<unknown[]> {
     return this.dbFunctions.getVocabularybyId(id);
   }
 

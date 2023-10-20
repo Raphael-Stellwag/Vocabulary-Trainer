@@ -39,7 +39,7 @@ export class AuthService {
       this.httpClient.post(environment.auth.REGISTER, JSON.stringify(userObject)).toPromise()
           .then((result: any) => {
         this.saveCredentials(userObject);
-        resolve();
+        resolve(""); //TODO: fix why here is "" needed
       }).catch(err => {
         console.log(err);
         reject(err);
@@ -59,7 +59,7 @@ export class AuthService {
       this.httpClient.post(environment.auth.LOGIN, JSON.stringify(userObject)).toPromise()
           .then((result: any) => {
         this.saveCredentials(userObject);
-        resolve();
+        resolve(""); //TODO: fix why here is "" needed
       }).catch(err => {
         console.log(err);
         reject(err);

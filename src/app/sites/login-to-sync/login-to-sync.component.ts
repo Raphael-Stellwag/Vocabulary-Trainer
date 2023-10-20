@@ -82,29 +82,29 @@ export class LoginToSyncComponent implements OnInit {
     console.log(password);
     if (user == null || password == null) {
       this.showErrorDialog("You have to insert a password and username");
-      return;
+      return false;
     } 
     user = user.trim();
     password = password.trim();
     
     if (user.length == 0 || password.length == 0) {
       this.showErrorDialog("You have to insert a password and username");
-      return;
+      return false;
     }
 
     if (password.length < 4) {
       this.showErrorDialog("password must be at least 4 digits long");
-      return;
+      return false;
     }
 
     if (user.length < 4) {
       this.showErrorDialog("username must be at least 4 digits long");
-      return;
+      return false;
     }
 
     if (user.search(":") != -1 || password.search(":") != -1) {
       this.showErrorDialog("a colon (:) ist not allowed in username and password");
-      return;
+      return false;
     }
 
     return true;

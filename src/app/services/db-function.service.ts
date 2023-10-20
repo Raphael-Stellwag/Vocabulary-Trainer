@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IVocabulary } from '../interfaces/vocabulary';
+import { ClasOption, IVocabulary, UnitOption } from '../interfaces/vocabulary';
 import { InitDbService } from './init-db.service';
 
 @Injectable({
@@ -29,15 +29,15 @@ export class DbFunctionService extends InitDbService {
   }
 
   getClases() {
-    return this.connection.select({ from: this.tableName, groupBy: this.colClas, order: {by: this.colClas, type: "asc", idbSorting: false}});
+    return this.connection.select({ from: this.tableName, groupBy: this.colClas, order: {by: this.colClas, type: "asc", idbSorting: false}}) as Promise<ClasOption[]>;
   }
 
-  getUnits(clas: String) {
-    return this.connection.select({from: this.tableName, where: {clas: clas}, groupBy: this.colUnit, order: {by: this.colUnit, type: "asc", idbSorting: false}})
+  getUnits(clas: string): Promise<UnitOption[]> {
+    return this.connection.select({from: this.tableName, where: {clas: clas}, groupBy: this.colUnit, order: {by: this.colUnit, type: "asc", idbSorting: false}}) as Promise<UnitOption[]>;
   }
 
-  getVocabularybyId(id: Number) {
-    return this.connection.select({from: this.tableName, where: {id: id}})
+  getVocabularybyId(id: number): Promise<any> {
+    return this.connection.select({from: this.tableName, where: {id: id}});
   }
 
   getAllVocs(): Promise<any> {
