@@ -1,11 +1,12 @@
 # Vocabulary Trainer
 
 ![Build & Publish app](https://github.com/Raphael-Stellwag/Vocabulary-Trainer/workflows/Build%20&%20Publish%20app/badge.svg)  
-Live version is accessable under [https://vocabulary-trainer.ml](https://vocabulary-trainer.ml)
+Live version is accessable under [https://vokabel-trainer-9e341.web.app/#/](https://vokabel-trainer-9e341.web.app/#/)
 
 ## Debugging 
 
  - ng serve --host 0.0.0.0
+  
 Debugging ios device on windows: https://github.com/google/ios-webkit-debug-proxy
 
 ## Deploy via ng deploy to firebase
