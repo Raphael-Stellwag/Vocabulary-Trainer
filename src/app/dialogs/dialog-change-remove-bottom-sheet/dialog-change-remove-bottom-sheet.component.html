@@ -1,11 +1,11 @@
-<mat-nav-list>
+<mat-nav-list class="noselect">
   <a mat-list-item (click)="editVoc($event)">
-    <span mat-line>Edit Vocabulary</span>
-    <span mat-line>Edit class, unit, word itself and more</span>
+    <span matListItemTitle>Edit Vocabulary</span>
+    <span matLine>Edit class, unit, word itself and more</span>
   </a>
 
   <a mat-list-item (click)="deleteVoc($event)">
-    <span mat-line>Delete Vocabulary</span>
-    <span mat-line>Delete this Vocabulary permanently (no undo possible)</span>
+    <span matListItemTitle>Delete Vocabulary</span>
+    <span matLine>Delete this Vocabulary permanently (no undo possible)</span>
   </a>
 </mat-nav-list>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { IVocabulary } from '../../interfaces/vocabulary';
-import {MatLegacyDialog as MatDialog} from '@angular/material/legacy-dialog';
+import {MatDialog} from '@angular/material/dialog';
 import { DialogQueryCheckInputComponent } from 'src/app/dialogs/dialog-query-check-input/dialog-query-check-input.component';
 import { DialogQueryFinalResultComponent } from 'src/app/dialogs/dialog-query-final-result/dialog-query-final-result.component';
 import { VocabularyService } from 'src/app/services/vocabulary.service';
