@@ -1,7 +1,7 @@
-import { version } from '../../package.json';
+import pkg from '../../package.json';
 
 export const environment = {
-  version: version,
+  version: pkg.version,
   production: true,
   auth: {
     LOGIN: "https://raphael-stellwag.tk/api/voc-trainer/v1/users/login",
