@@ -17,6 +17,7 @@ jobs:
         run: |
           npm install
           npm install @angular/cli
+          npm install firebase-tools
       - name: increase version
         run: |
           date > generated.txt
@@ -27,15 +28,13 @@ jobs:
           git push --tags
       - name: build prod version
         run: |
-          npm install
-          npm install @angular/cli
+          # npm install
+          # npm install @angular/cli
           npm run sw-build
           # ng build --prod
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.0.0
-        with:
-          server: files.000webhost.com
-          username: podgiest-removal
-          password: ${{ secrets.password }} 
-          server-dir: public_html/
-          local-dir: dist/
+      - name: Deploy to Firebase
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        run: |
+          firebase login --token "$FIREBASE_TOKEN"
+          ng deploy
