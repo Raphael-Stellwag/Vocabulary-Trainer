@@ -69,13 +69,28 @@ import { DialogEditVocabularyComponent } from './dialogs/dialog-edit-vocabulary/
 import { AuthService } from './services/auth.service';
 import { LoadingSpinnerComponent } from './frames/loading-spinner/loading-spinner.component';
 import { FullscreenOverlayContainer, OverlayContainer} from '@angular/cdk/overlay';
-import { InterceptorService } from './services/interceptor.service';
 
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { LoginToSyncComponent } from './sites/login-to-sync/login-to-sync.component';
 import { DialogErrorMessageComponent } from './dialogs/dialog-error-message/dialog-error-message.component';
 import { DialogSuccessMessageComponent } from './dialogs/dialog-success-message/dialog-success-message.component';
 import { ImpressumComponent } from './sites/impressum/impressum.component';
+import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
+
+function initializeKeycloak(keycloak: KeycloakService) {
+    return () =>
+        keycloak.init({
+            config: {
+                url: environment.auth.URL,
+                realm: 'Voc-Realm',
+                clientId: 'voc-angular-application'
+            },
+            initOptions: {
+                onLoad: 'check-sso',
+                silentCheckSsoRedirectUri:
+                    window.location.origin + '/assets/silent-check-sso.html'
+            },
+            loadUserProfileAtStartUp: true
+        });
+}
 
 @NgModule({
     imports: [
@@ -123,6 +138,7 @@ import { ImpressumComponent } from './sites/impressum/impressum.component';
         FormsModule,
         AppRoutingModule,
         RouterModule,
+        KeycloakAngularModule,
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     ],
     exports: [MatButtonModule, MatFormFieldModule, MatCheckboxModule],
@@ -146,7 +162,6 @@ import { ImpressumComponent } from './sites/impressum/impressum.component';
         DialogConfirmationComponent,
         DialogEditVocabularyComponent,
         LoadingSpinnerComponent,
-        LoginToSyncComponent,
         DialogErrorMessageComponent,
         DialogSuccessMessageComponent,
         ImpressumComponent,
@@ -156,9 +171,10 @@ import { ImpressumComponent } from './sites/impressum/impressum.component';
         AuthService,
         { provide: LoadingSpinnerComponent, useClass: FullscreenOverlayContainer },
         {
-            provide: HTTP_INTERCEPTORS,
-            useClass: InterceptorService,
-            multi: true
+            provide: APP_INITIALIZER,
+            useFactory: initializeKeycloak,
+            multi: true,
+            deps: [KeycloakService]
         }
     ],
     bootstrap: [AppComponent]

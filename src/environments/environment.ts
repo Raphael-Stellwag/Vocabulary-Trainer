@@ -4,16 +4,12 @@
 import pkg from '../../package.json';
 
 export const environment = {
-  version: pkg.version + "-DEV",
+  version: pkg.version + '-DEV',
   production: false,
   auth: {
-    LOGIN: "http://localhost:3010/v1/users/login",
-    REGISTER: "http://localhost:3010/v1/users/register",
+    URL: 'http://localhost:8180/auth',
   },
   vocabulary_server: {
-    URL: "http://localhost:3010/v1/actions",
-    //URL: "https://raphael-stellwag.tk/api/voc-trainer/v1/actions",
-    //URL: "http://www.vocabulary-trainer.ml/vocabulary-trainer/v1/actions",
-    //    URL: "https://vocabulary-trainer.ml/vocabulary-trainer/v1/actions",
+    URL: 'http://localhost:8080/v1/actions',
   }
 };

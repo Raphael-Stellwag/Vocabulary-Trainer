@@ -31,6 +31,8 @@
     "file-loader": "^6.2.0",
     "firebase": "^10.5.0",
     "jsstore": "^4.6.4",
+    "keycloak-js": "^22.0.5",
+    "keycloak-angular": "^14.1.0",
     "replace-in-file": "^7.0.1",
     "rxjs": "~6.6.3",
     "zone.js": "~0.13.3"

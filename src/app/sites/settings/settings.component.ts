@@ -26,15 +26,20 @@ export class SiteSettingsComponent implements OnInit {
   userId: string = null;
   version: string = null;
 
-  constructor(public snackBar: MatSnackBar, public auth: AuthService, private dialog: MatDialog, 
+  constructor(public snackBar: MatSnackBar, public auth: AuthService, private dialog: MatDialog,
     private vocService: VocabularyService, private overlay: Overlay, private rest: VocabularyRestService ) { }
- 
+
   ngOnInit() {
     console.log("Init called");
 
     this.version = environment.version;
 
-    this.userId = this.auth.getUsername();
+    this.auth.isLoggedIn().then(result => {
+      if (result) {
+        this.userId = this.auth.getUsername();
+      }
+    });
+
   }
 
   saveButtonPressed() {
@@ -119,5 +124,12 @@ export class SiteSettingsComponent implements OnInit {
 
   sync() {
     this.vocService.sync();
+  }
+
+  async login() {
+    const loggedIn = await this.auth.login();
+    if (loggedIn) {
+      this.userId = this.auth.getUsername();
+    }
   }
 }

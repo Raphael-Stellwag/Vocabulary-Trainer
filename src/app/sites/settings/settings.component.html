@@ -3,7 +3,7 @@
 <div style="width: 50%; float: left;">
   <span class="headerText">Settings</span>
 </div>
-   
+
 <div style='clear: both;'>
 </div>
 
@@ -36,7 +36,7 @@
   <div style="width: 50%; position: relative; float: left;" (click)="chooseFileToImport()">
     <span class="buttonText">
       <div style="height: 0px; width: 0px; overflow: hidden;"><input id="importFile" type="file" value="importFile" accept="application/json"></div>
-      Import 
+      Import
       <!--<i class="material-icons" style="line-height: 32px; bottom: 0px">cloud_download</i>-->
     </span>
     <div style="width: 1px; height:100%; background-color: white; float: right; position: absolute;"></div>
@@ -44,22 +44,20 @@
   <div style="width: 50%; position: relative; float: right;" (click)="chooseVocabularyToExport()" (keypress)="chooseVocabularyToExport()" tabindex="0">
     <div style="width: 1px; height:100%; background-color: white; float: left; position: absolute;"></div>
     <span class="buttonText">
-      Export 
+      Export
         <!--<i class="material-icons" style="line-height: 32px; bottom: 0px">cloud_download</i>-->
     </span>
   </div>
 </div>
 <br>
 
-<!-- TODO: Fix Auth Server
-<a routerLink="/settings/login" *ngIf="userId == null" style="text-decoration:none;">
-  <div class="button">
+<div *ngIf="userId == null">
+  <div class="button" (click)="login()">
     <span class="buttonText">
       Login to Sync
     </span>
   </div>
-</a>
-
+</div>
 
 <div *ngIf="userId != null" >
   <span class="buttonHeader">Logged in as {{userId}}</span>
@@ -71,7 +69,6 @@
 
 </div>
 <br>
--->
 
 <a routerLink="/settings/impressum" style="text-decoration:none;">
   <div class="button">

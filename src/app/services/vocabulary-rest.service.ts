@@ -20,24 +20,24 @@ export class VocabularyRestService {
     if (this.auth.isLoggedIn() && this.internetConnection.isConnected()) {
       return await this.handleServiceStart();
     } else {
-      console.log("No internet or not logged in ")
+      console.log('No internet or not logged in');
     }
   }
 
   private handleServiceStart() {
-    let _this = this;
-    return new Promise(function(resolve, reject) {  
+    const _this = this;
+    return new Promise(function(resolve, reject) {
       _this.getNewActions().subscribe((result: any) => {
-        console.log("result", result);
+        console.log('result', result);
         if (result.length > 0) {
-          _this.syncLocal(result as IAction[]).then(res => 
+          _this.syncLocal(result as IAction[]).then(res =>
             resolve(res)
           ).catch(err => {
             console.error(err);
-            reject(err)}
+            reject(err); }
           );
         } else if (LocalStorageNamespace.getLocalSavedActions().length > 0) {
-          _this.postLocalActions(LocalStorageNamespace.getLocalSavedActions()).then(res => 
+          _this.postLocalActions(LocalStorageNamespace.getLocalSavedActions()).then(res =>
             resolve(res)
           ).catch(err => {
             console.error(err);
@@ -54,7 +54,7 @@ export class VocabularyRestService {
   }
 
   private syncLocal(serverActions: IAction[]): Promise<any> {
-    let local: IAction[] = LocalStorageNamespace.getLocalSavedActions();
+    const local: IAction[] = LocalStorageNamespace.getLocalSavedActions();
     return this.performReverseLocalActions(local, serverActions);
   }
 
@@ -69,7 +69,7 @@ export class VocabularyRestService {
           _this.performReverseAction(element, element.method).finally(function() {
             countFinished++;
             if (countFinished == local.length) {
-              _this.performServerActions(local, serverActions).then(res => 
+              _this.performServerActions(local, serverActions).then(res =>
                 resolve(res)
               ).catch(err => {
                 console.error(err);
@@ -80,7 +80,7 @@ export class VocabularyRestService {
 
         }
       })
-      
+
     } else {
       return this.performServerActions(local, serverActions);
     }
@@ -103,27 +103,27 @@ export class VocabularyRestService {
               justCreated = true;
               innerIndex = index;
             }
-          } 
+          }
           if (!justCreated) {
             for(let innerIndex = 0; innerIndex < local.length; innerIndex++) {
               if (local[innerIndex].vocabularyAfterAction != null && local[innerIndex].vocabularyAfterAction.id == idToDelete) {
                 local.splice(innerIndex, 1);
-                
+
                 // Can there be any further actions --> after delete no furter action posssible
                 if (local[innerIndex].method == ActionMethod.DELETE) {
                   innerIndex = local.length;
                 }
               }
-            }  
+            }
           }
         }
-        
+
         this.performAction(element, element.method).finally(function() {
           countFinished++;
           if (countFinished == serverActions.length) {
             LocalStorageNamespace.addCountSynchronizedActions(serverActions.length);
 
-            _this.performLocalActionsAndPushThem(local).then(res => 
+            _this.performLocalActionsAndPushThem(local).then(res =>
               resolve(res)
             ).catch(err => {
               console.error(err);
@@ -148,7 +148,7 @@ export class VocabularyRestService {
       await this.performAction(element, element.method).catch(err => {
         console.log("sdfsdfsdfxc", err);
         throw Error(err);
-      });  
+      });
 
       if (element.method == ActionMethod.ADD) {
         for (let innerIndex = index; innerIndex < local.length; innerIndex++) {
@@ -165,7 +165,7 @@ export class VocabularyRestService {
     }
     LocalStorageNamespace.setNextPrimaryId(newId+1);
     return await this.postLocalActions(localActionsReadyToPush);
-  } 
+  }
 
   private performAction(element:IAction, method: ActionMethod) {
     switch (method) {
@@ -201,13 +201,13 @@ export class VocabularyRestService {
 
   private postLocalActions(actions: IAction[]) {
     let resolveIt, rejectIt;
-    let promise = new Promise(function(resolve, reject) {  
+    let promise = new Promise(function(resolve, reject) {
       resolveIt = resolve; rejectIt = reject;
     });
     console.log(JSON.stringify(actions));
     this.httpClient.post(environment.vocabulary_server.URL + "?count-synchronised-actions=" + LocalStorageNamespace.getCountSynchronisedActions(), JSON.stringify(actions)/*, this.customHttpHeader()*/).subscribe((result:any) => {
       console.log(result);
-      
+
       if(result.status === "ok") {
         LocalStorageNamespace.addCountSynchronizedActions(actions.length);
         LocalStorageNamespace.deleteLocalSavedActions();
@@ -243,7 +243,7 @@ export class VocabularyRestService {
     if (actions.length > 0)
       newId = actions[actions.length-1].id+1;
     else
-      newId = LocalStorageNamespace.getCountSynchronisedActions();  
+      newId = LocalStorageNamespace.getCountSynchronisedActions();
     return newId;
   }
 
