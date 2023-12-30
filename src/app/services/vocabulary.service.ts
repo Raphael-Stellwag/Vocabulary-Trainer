@@ -1,7 +1,7 @@
 import { VocabularyRestService } from 'src/app/services/vocabulary-rest.service';
-import { FilteredDataObject } from './../interfaces/FilteredDataObject';
+import { FilteredDataObject } from '../interfaces/FilteredDataObject';
 import { VocabularyDbService } from './vocabulary-db.service';
-import { Vocabulary } from './../interfaces/vocabulary';
+import { Vocabulary } from '../interfaces/vocabulary';
 import { Injectable } from '@angular/core';
 import { ActionMethod } from '../interfaces/action';
 
@@ -14,17 +14,17 @@ export class VocabularyService {
   constructor(private dbService: VocabularyDbService, private restService: VocabularyRestService) { }
 
   async sync() {
-    let result = await this.restService.sync();
-    this.updateCurrentUsedFilteredDataObjects();
+    const result = await this.restService.sync();
+    await this.updateCurrentUsedFilteredDataObjects();
     return result;
   }
 
   async addBulkVocabulary(vocs: Vocabulary[]) {
-    let dbResults = await this.dbService.addBulkVocabulary(vocs);
-    for (let dbResult of dbResults) {
+    const dbResults = await this.dbService.addBulkVocabulary(vocs);
+    for (const dbResult of dbResults) {
       this.restService.saveActionForLaterPush(ActionMethod.ADD, null, dbResult);
     }
-    this.restService.sync();
+    await this.restService.sync();
   }
 
   async getVocabularyCount() {
@@ -49,12 +49,12 @@ export class VocabularyService {
   }
 
   async getVocsFromOneUnitWithUpdate(clas: string, unit: string): Promise<FilteredDataObject> {
-    let result = await this.dbService.getVocsFromOneUnit(clas, unit);
-    let filteredDataObject = new FilteredDataObject();
+    const result = await this.dbService.getVocsFromOneUnit(clas, unit);
+    const filteredDataObject = new FilteredDataObject();
     console.log(filteredDataObject);
     filteredDataObject.clas = clas;
     filteredDataObject.unit = unit;
-    filteredDataObject.data = Vocabulary.createCorrectReferences(result); 
+    filteredDataObject.data = Vocabulary.createCorrectReferences(result);
 
     console.log(filteredDataObject);
     console.log(filteredDataObject.data);
@@ -65,15 +65,15 @@ export class VocabularyService {
   }
 
   async getAllVocsWithUpdates(): Promise<FilteredDataObject> {
-    let result = await this.dbService.getAllVocs();
-    let filteredDataObject = new FilteredDataObject();
-    filteredDataObject.data = Vocabulary.createCorrectReferences(result); 
+    const result = await this.dbService.getAllVocs();
+    const filteredDataObject = new FilteredDataObject();
+    filteredDataObject.data = Vocabulary.createCorrectReferences(result);
     this.currentUsedFilteredDataObject.push(filteredDataObject);
     return filteredDataObject;
   }
 
   async addVocabulary(voc: Vocabulary): Promise<any> {
-    let result = await this.dbService.addVocabulary(voc);
+    const result = await this.dbService.addVocabulary(voc);
     this.restService.postAction(ActionMethod.ADD, null, result[0]);
     this.addVocToAllFilteredDataObjects(voc);
     return result;
@@ -86,14 +86,14 @@ export class VocabularyService {
   }
 
   async editVocabulary(voc: Vocabulary) {
-    let action = await this.dbService.editVocabulary(voc);
-    this.restService.postAction(action.method, action.vocabularyBeforeAction, action.vocabularyAfterAction);  
+    const action = await this.dbService.editVocabulary(voc);
+    this.restService.postAction(action.method, action.vocabularyBeforeAction, action.vocabularyAfterAction);
     this.editVocInAllFilteredDataObjects(voc);
   }
 
   public removeFilteredDataObject(obj: FilteredDataObject) {
     if (this.currentUsedFilteredDataObject.includes(obj)) {
-      this.currentUsedFilteredDataObject.splice(this.currentUsedFilteredDataObject.indexOf(obj), 1)
+      this.currentUsedFilteredDataObject.splice(this.currentUsedFilteredDataObject.indexOf(obj), 1);
     }
   }
 
@@ -111,48 +111,48 @@ export class VocabularyService {
 
   private addVocToAllFilteredDataObjects(voc: Vocabulary) {
     this.currentUsedFilteredDataObject.forEach((object) => {
-      if(this.vocFitsFilterOfDataObject(object, voc)) {
+      if (this.vocFitsFilterOfDataObject(object, voc)) {
         object.data.push(voc);
       }
-    })
+    });
   }
 
   private deleteVocFromFilteredDataObjects(voc: Vocabulary) {
     this.currentUsedFilteredDataObject.forEach((object) => {
-      if(this.vocFitsFilterOfDataObject(object, voc)) {
-        let index = object.data.indexOf(voc);
+      if (this.vocFitsFilterOfDataObject(object, voc)) {
+        const index = object.data.indexOf(voc);
         if (index > -1) {
-          object.data.splice(index, 1)
+          object.data.splice(index, 1);
         }
       }
-    })
+    });
   }
 
   private editVocInAllFilteredDataObjects(voc: Vocabulary) {
     this.currentUsedFilteredDataObject.forEach((object) => {
         let toRemove = null;
         object.data.forEach((oldVocData) => {
-          if (oldVocData.id == voc.id) {
+          if (oldVocData.id === voc.id) {
             if (this.vocFitsFilterOfDataObject(object, voc)) {
               oldVocData = voc;
             } else {
               toRemove = oldVocData;
             }
           }
-        })
+        });
         if (toRemove != null) {
           object.data.splice(object.data.indexOf(toRemove), 1);
         }
-    })
+    });
   }
 
   private vocFitsFilterOfDataObject(filteredDataObject: FilteredDataObject, voc: Vocabulary) {
     if (filteredDataObject.clas == null && filteredDataObject.unit == null) {
       return true;
     } else if (filteredDataObject.clas != null && filteredDataObject.unit == null) {
-      return (filteredDataObject.clas == voc.clas);
+      return (filteredDataObject.clas === voc.clas);
     } else {
-      return (filteredDataObject.clas == voc.clas && filteredDataObject.unit == voc.unit);
+      return (filteredDataObject.clas === voc.clas && filteredDataObject.unit === voc.unit);
     }
   }
 }

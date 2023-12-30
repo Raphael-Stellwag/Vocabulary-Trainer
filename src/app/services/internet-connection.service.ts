@@ -5,15 +5,15 @@ import { Injectable } from '@angular/core';
 })
 export class InternetConnectionService {
 
-  private isConnectionAvailable: boolean = navigator.onLine; 
+  private isConnectionAvailable: boolean = navigator.onLine;
 
-  constructor() { 
+  constructor() {
     window.addEventListener('online', () => {
-      this.isConnectionAvailable = true
+      this.isConnectionAvailable = true;
     });
 
     window.addEventListener('offline', () => {
-      this.isConnectionAvailable = false
+      this.isConnectionAvailable = false;
     });
   }
 

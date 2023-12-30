@@ -1,7 +1,6 @@
 import { Action } from '../interfaces/action';
 import { Injectable } from '@angular/core';
 import { ClasOption, IVocabulary, UnitOption, Vocabulary } from '../interfaces/vocabulary';
-import { VocabularyRestService } from './vocabulary-rest.service';
 import { ActionMethod } from '../interfaces/action';
 import { DbFunctionService } from './db-function.service';
 import { LocalStorageNamespace } from './local-storage.namespace';
@@ -23,7 +22,7 @@ export class VocabularyDbService {
     });
   }
 
-  //By Bulk Insert First perform all Inserts locally and then push the actions with one request to the server
+  // By Bulk Insert First perform all Inserts locally and then push the actions with one request to the server
   async addBulkVocabulary(vocs: Vocabulary[]) {
     const dbResults: IVocabulary[] = [];
     for (let i = 0; i < vocs.length; i++) {

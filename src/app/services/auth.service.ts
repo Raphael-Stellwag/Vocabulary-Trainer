@@ -12,8 +12,8 @@ export class AuthService {
     return await this.keycloakService.isLoggedIn();
   }
 
-  logout() {
-    this.keycloakService.logout();
+  async logout() {
+    await this.keycloakService.logout();
   }
 
   getUsername(): string {

@@ -14,10 +14,11 @@ import { DbFunctionService } from './db-function.service';
 })
 export class VocabularyRestService {
 
-  constructor(private httpClient: HttpClient, private auth: AuthService, private dbFunctions: DbFunctionService, private internetConnection: InternetConnectionService) { }
+  constructor(private httpClient: HttpClient, private auth: AuthService, private dbFunctions: DbFunctionService,
+              private internetConnection: InternetConnectionService) { }
 
   async sync () {
-    if (this.auth.isLoggedIn() && this.internetConnection.isConnected()) {
+    if (await this.auth.isLoggedIn() && this.internetConnection.isConnected()) {
       return await this.handleServiceStart();
     } else {
       console.log('No internet or not logged in');
@@ -224,9 +225,9 @@ export class VocabularyRestService {
     return promise;
   }
 
-  postAction(method: ActionMethod, vocBeforeAction: IVocabulary, vocAfterAction: IVocabulary) {
+  async postAction(method: ActionMethod, vocBeforeAction: IVocabulary, vocAfterAction: IVocabulary) {
     this.saveActionForLaterPush(method, vocBeforeAction, vocAfterAction);
-    if (this.auth.isLoggedIn() && this.internetConnection.isConnected()) {
+    if (await this.auth.isLoggedIn() && this.internetConnection.isConnected()) {
       console.log("authenticated");
       this.sync();
     } else {

@@ -9,15 +9,15 @@ import { environment } from 'src/environments/environment';
 })
 export class InitDbService {
 
-  private dbName = "Ts_Vocabulary";
-  protected tableName = "Vocabulary";
-  protected colId = "id";
-  protected colClas = "clas";
-  protected colUnit = "unit";
-  protected colPrimaryLanguage = "primaryLanguage";
-  protected colSecondaryLanguage = "secondaryLanguage";
-  protected colTries = "tries";
-  protected colFailuresCount = "failuresCount";
+  private dbName = 'Ts_Vocabulary';
+  protected tableName = 'Vocabulary';
+  protected colId = 'id';
+  protected colClas = 'clas';
+  protected colUnit = 'unit';
+  protected colPrimaryLanguage = 'primaryLanguage';
+  protected colSecondaryLanguage = 'secondaryLanguage';
+  protected colTries = 'tries';
+  protected colFailuresCount = 'failuresCount';
 
   constructor() {
     // initiate database when a service instance is initiated
@@ -26,17 +26,17 @@ export class InitDbService {
 
   /**
    * create database
-   * 
+   *
    * @memberof IdbService
    */
   private initDatabase() {
 
-    var dbNewlyCreated = this.connection.initDb(this.getDatabase());
+    const dbNewlyCreated = this.connection.initDb(this.getDatabase());
     console.info(dbNewlyCreated);
 
     // initiate jsstore connection
-    //var connection = new JsStore.Connection();
-    //var isDbCreated
+    // var connection = new JsStore.Connection();
+    // var isDbCreated
 
     /*
     this.connection.isDbExist(this.dbName).then(isExist => {
@@ -68,7 +68,6 @@ export class InitDbService {
         },
         unit:
         {
-
           dataType: DATA_TYPE.String,
           notNull: true
         },
