@@ -1,12 +1,12 @@
-import { InternetConnectionService } from './internet-connection.service';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { AuthService } from './auth.service';
-import {  IVocabulary } from '../interfaces/vocabulary';
-import { LocalStorageNamespace } from './local-storage.namespace';
-import { environment } from 'src/environments/environment';
-import { IAction, Action, ActionMethod } from '../interfaces/action';
-import { DbFunctionService } from './db-function.service';
+import {InternetConnectionService} from './internet-connection.service';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {AuthService} from './auth.service';
+import {IVocabulary, Vocabulary} from '../interfaces/vocabulary';
+import {LocalStorageNamespace} from './local-storage.namespace';
+import {environment} from 'src/environments/environment';
+import {Action, ActionMethod, IAction} from '../interfaces/action';
+import {DbFunctionService} from './db-function.service';
 
 
 @Injectable({
@@ -254,4 +254,45 @@ export class VocabularyRestService {
     LocalStorageNamespace.setLocalSavedActions(actions);
   }
 
+  async canReachTheBackend() {
+    return (await this.auth.isLoggedIn() && this.internetConnection.isConnected());
+  }
+
+  async postVocabulary(voc: Vocabulary): Promise<Vocabulary|null> {
+    if (!await this.canReachTheBackend()) {
+      return null;
+    }
+
+    const result = await this.httpClient.post(environment.vocabulary_server.URL, JSON.stringify(voc),
+        {headers: this.getHeaders()}).toPromise();
+
+    console.log(result);
+    if (result !== null) {
+      return result as Vocabulary;
+    }
+
+    return null;
+  }
+
+  async putVocabulary(voc: Vocabulary) {
+    if (!await this.canReachTheBackend()) {
+      return null;
+    }
+
+    const result = await this.httpClient.put(environment.vocabulary_server.URL + '/' + voc.id, JSON.stringify(voc),
+        {headers: this.getHeaders()}).toPromise();
+
+    console.log(result);
+    if (result !== null) {
+      return result as Vocabulary;
+    }
+
+    return null;
+  }
+
+  private getHeaders() {
+    return new HttpHeaders()
+        .set('Content-Type', 'application/json; charset=utf-8')
+        .set('Accept', 'application/json');
+  }
 }

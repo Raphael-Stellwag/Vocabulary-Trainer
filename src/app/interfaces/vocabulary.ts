@@ -1,68 +1,68 @@
 export interface IVocabulary {
     id?;
-    tries;
-    failuresCount;
-    
-    clas;
+    success_count;
+    failures_count;
+
+    class;
     unit;
-    primaryLanguage;
-    secondaryLanguage;
+    primary_language;
+    secondary_language;
+
+    last_changed;
+    deleted;
 }
 
 export interface UnitOption {
-    unit: string
-}
-  
-export interface ClasOption {
-    clas: string
+    unit: string;
 }
 
-export class Vocabulary implements IVocabulary{
+export interface ClassOption {
+    class: string;
+}
+
+export class Vocabulary implements IVocabulary {
     id;
-    tries;
-    failuresCount;
-    
-    clas;
+    success_count;
+    failures_count;
+
+    class;
     unit;
-    primaryLanguage;
-    secondaryLanguage; 
+    primary_language;
+    secondary_language;
 
-    constructor(newId?, newTries?, newFailuresCount?, newClas?, newUnit?, newPrimaryLanguage?, newSecondaryLanguage?) {
-        this.id = newId;
-        this.tries = newTries;
-        this.failuresCount = newFailuresCount;
-        this.clas = newClas;
-        this.unit = newUnit;
-        this.primaryLanguage = newPrimaryLanguage;
-        this.secondaryLanguage = newSecondaryLanguage;
+    last_changed;
+    deleted;
+
+    constructor(new_id?, new_success_count?, new_failures_count?, new_class?, new_unit?, new_primary_language?, new_secondary_language?,
+                new_last_changed?, new_deleted?) {
+        this.id = new_id;
+        this.success_count = new_success_count;
+        this.failures_count = new_failures_count;
+        this.class = new_class;
+        this.unit = new_unit;
+        this.primary_language = new_primary_language;
+        this.secondary_language = new_secondary_language;
+        this.last_changed = new_last_changed;
+        this.deleted = new_deleted;
     }
 
-    setNewValues(newVocValues: Vocabulary) {
-        this.id = newVocValues.id;
-        this.tries = newVocValues.tries;
-        this.failuresCount = newVocValues.failuresCount;
-        this.clas = newVocValues.clas;
-        this.unit = newVocValues.unit;
-        this.primaryLanguage = newVocValues.primaryLanguage;
-        this.secondaryLanguage = newVocValues.secondaryLanguage;
-    }
-    
-    createNewObject() {
-        return new Vocabulary(this.id, this.tries, this.failuresCount, this.clas, this.unit, this.primaryLanguage, this.secondaryLanguage);
+    private static createNewObject(context: IVocabulary) {
+        return new Vocabulary(context.id, context.success_count, context.failures_count, context.class, context.unit,
+            context.primary_language, context.secondary_language, context.last_changed, context.deleted);
     }
 
-    static createCorrectReferences(vocs) {
-        let newVocs: Vocabulary[] = new Array();
-        for(let element of vocs) {
-            let newVoc = new Vocabulary(element.id, element.tries, element.failuresCount, element.clas, element.unit, element.primaryLanguage, element.secondaryLanguage);
+    static createCorrectReferences(vocs: IVocabulary[]) {
+        const newVocs: Vocabulary[] = [];
+        for (const element of vocs) {
+            const newVoc = this.createNewObject(element);
             console.log(newVoc);
             newVocs.push(newVoc);
         }
         return newVocs;
     }
 
-    static createCorrectReference(voc) {
-        return new Vocabulary(voc.id, voc.tries, voc.failuresCount, voc.clas, voc.unit, voc.primaryLanguage, voc.secondaryLanguage);
+    static createCorrectReference(voc: IVocabulary) {
+        return this.createNewObject(voc);
     }
 
 }

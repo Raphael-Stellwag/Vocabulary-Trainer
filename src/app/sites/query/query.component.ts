@@ -12,32 +12,33 @@ import { VocabularyService } from 'src/app/services/vocabulary.service';
   styleUrls: ['./query.component.css']
 })
 export class SiteQueryComponent implements OnInit {
-  private clas: string;
+  private class: string;
   private unit: string;
-  private unitSetted: boolean = true;
-  public vocsToQuery: IVocabulary[] = [{primaryLanguage: "", tries:0, clas:"", unit:"", secondaryLanguage: "", failuresCount:0}];
-  private correct: number = 0;
-  private failures: number = 0;
-  public index:number = 0;
+  private unitSetted = true;
+  public vocsToQuery: IVocabulary[] = [{primary_language: '', success_count: 0, class: '', unit: '', secondary_language: '', failures_count: 0,
+    deleted: false, last_changed: new Date().toISOString()}];
+  private correct = 0;
+  private failures = 0;
+  public index = 0;
 
-  constructor(public vocService: VocabularyService, public router: Router, public route: ActivatedRoute, public dialog: MatDialog) { 
+  constructor(public vocService: VocabularyService, public router: Router, public route: ActivatedRoute, public dialog: MatDialog) {
     this.route.params.forEach((params: Params) => {
       if (params['unit'] !== undefined) {
         this.unit = params['unit'];
       }
-      if (params['clas'] !== undefined) {
-        this.clas = params['clas'];
+      if (params['class'] !== undefined) {
+        this.class = params['class'];
       }
     });
-    if (this.clas === undefined || this.clas === null) {
-      router.navigate(["../"]);
+    if (this.class === undefined || this.class === null) {
+      router.navigate(['../']);
     }
 
-    if (this.unit === undefined || this.unit === null || this.unit === "") {
+    if (this.unit === undefined || this.unit === null || this.unit === '') {
       this.unitSetted = false;
-      vocService.getVocsFromOneClas(this.clas).then((result:IVocabulary[]) => {this.vocsToQuery = result; });
+      vocService.getVocsFromOneClas(this.class).then((result: IVocabulary[]) => {this.vocsToQuery = result; });
     } else {
-      vocService.getVocsFromOneUnit(this.clas, this.unit).then((result:IVocabulary[]) => {this.vocsToQuery = result})
+      vocService.getVocsFromOneUnit(this.class, this.unit).then((result: IVocabulary[]) => {this.vocsToQuery = result; });
     }
   }
 
@@ -45,9 +46,9 @@ export class SiteQueryComponent implements OnInit {
   }
 
   checkPressed() {
-    let userInputField = document.getElementById("SecondaryLanguage");
-    let secondaryLanguageInput = userInputField.textContent;
-    userInputField.innerHTML = "";
+    const userInputField = document.getElementById('SecondaryLanguage');
+    const secondaryLanguageInput = userInputField.textContent;
+    userInputField.innerHTML = '';
     userInputField.focus();
 
     const dialogRef = this.dialog.open(DialogQueryCheckInputComponent, {
@@ -61,20 +62,20 @@ export class SiteQueryComponent implements OnInit {
       } else {
         this.failures++;
       }
-      if(this.index + 1 < this.vocsToQuery.length) {
+      if (this.index + 1 < this.vocsToQuery.length) {
         this.index++;
       } else {
-        //show FinalDialog
+        // show FinalDialog
         this.shwoFinalDialog();
       }
     });
-    
+
   }
 
   private shwoFinalDialog() {
     const dialogRef = this.dialog.open(DialogQueryFinalResultComponent, {
       width: '250px',
-      data: {count: this.index+1, correct: this.correct, failures: this.failures}
+      data: {count: this.index + 1, correct: this.correct, failures: this.failures}
     });
 
     dialogRef.afterClosed().subscribe(result => {

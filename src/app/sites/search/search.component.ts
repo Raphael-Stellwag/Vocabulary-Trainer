@@ -41,12 +41,12 @@ export class SiteSearchComponent implements OnInit, OnDestroy {
         }
       }, 100);
     });
-  
+
     let editable = document.getElementById("SearchText");
     if (editable.addEventListener) {
       editable.addEventListener("input", evt => this.filterItems(evt), false);
     }
-    
+
   }
 
   ngOnDestroy() {
@@ -55,7 +55,7 @@ export class SiteSearchComponent implements OnInit, OnDestroy {
 
   filterItems(evt): void {
     let searchText = document.getElementById("SearchText").innerHTML;
-    
+
     //Firefox Bug Fix
     if (searchText.includes("<br>")) {
       searchText = searchText.replace("<br>", "");
@@ -69,7 +69,7 @@ export class SiteSearchComponent implements OnInit, OnDestroy {
     let newFilteredVocs: Vocabulary[] = new Array();
     searchText = searchText.toUpperCase();
     for (let voc of this.vocServiceObject.data) {
-      if (voc.primaryLanguage.toUpperCase().includes(searchText) || voc.secondaryLanguage.toUpperCase().includes(searchText)) {
+      if (voc.primary_language.toUpperCase().includes(searchText) || voc.secondary_language.toUpperCase().includes(searchText)) {
         newFilteredVocs.push(voc);
       }
     }
@@ -82,7 +82,7 @@ export class SiteSearchComponent implements OnInit, OnDestroy {
       data: voc
     });
 
-    
+
     bottomSheetRef.afterDismissed().toPromise().then(deleted => {
       if (deleted) {
         this.filterItems(null);

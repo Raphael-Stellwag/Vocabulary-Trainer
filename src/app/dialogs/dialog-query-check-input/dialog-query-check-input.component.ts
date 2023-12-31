@@ -12,7 +12,7 @@ export class DialogQueryCheckInputComponent {
   constructor(
     public dialogRef: MatDialogRef<DialogQueryCheckInputComponent>,
     @Inject(MAT_DIALOG_DATA) public data) {
-       if(this.checkUserInput(data)) {
+       if (this.checkUserInput(data)) {
          this.correct = true;
        } else {
          this.correct = false;
@@ -23,12 +23,12 @@ export class DialogQueryCheckInputComponent {
     this.dialogRef.close(this.correct);
   }
 
-  correctClicked() : void {
+  correctClicked(): void {
     this.dialogRef.close(true);
   }
 
   private checkUserInput(data) {
-    return data.userInput.toLocaleLowerCase() == data.voc.secondaryLanguage.toLocaleLowerCase();    
+    return data.userInput.toLocaleLowerCase() == data.voc.secondary_language.toLocaleLowerCase();
   }
 }
 

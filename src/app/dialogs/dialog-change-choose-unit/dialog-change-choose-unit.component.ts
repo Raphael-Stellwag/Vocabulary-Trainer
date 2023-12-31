@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { ChoosenUnit } from '../../interfaces/choosen-unit';
+import { ChosenUnit } from '../../interfaces/chosen-unit';
 import { VocabularyDbService } from 'src/app/services/vocabulary-db.service';
 
 @Component({
@@ -9,20 +9,20 @@ import { VocabularyDbService } from 'src/app/services/vocabulary-db.service';
   styleUrls: ['./dialog-change-choose-unit.component.css']
 })
 export class DialogChangeChooseUnitComponent {
-  clasOptions = [];
+  classOptions = [];
   unitOptions = [];
-  unitChoosen = false;
-  clasChoosen = false;
-  data: ChoosenUnit = {
-    clas: "",
-    unit: "",
-  }
-  test="";
+  unitChosen = false;
+  classChosen = false;
+  data: ChosenUnit = {
+    class: '',
+    unit: '',
+  };
+  test = '';
 
   constructor(public dialogRef: MatDialogRef<DialogChangeChooseUnitComponent>, private vocService: VocabularyDbService) {
-    vocService.getClases().then((classes) => {
-      this.clasOptions = classes;
-    }).catch(err => console.log("ERR", err));
+    vocService.getClasses().then((classes) => {
+      this.classOptions = classes;
+    }).catch(err => console.log('ERR', err));
   }
 
   cancelClicked(): void {
@@ -33,22 +33,22 @@ export class DialogChangeChooseUnitComponent {
     this.dialogRef.close(this.data);
   }
 
-  clasChanged(): void {
-    this.vocService.getUnits(this.data.clas).then((units) => {
+  classChanged(): void {
+    this.vocService.getUnits(this.data.class).then((units) => {
       this.unitOptions = units;
-    }).catch(err => console.log("ERR", err));
-    if (this.data.clas != "") {
-      this.clasChoosen = true;
+    }).catch(err => console.log('ERR', err));
+    if (this.data.class !== '') {
+      this.classChosen = true;
     } else {
-      this.clasChoosen = false;
+      this.classChosen = false;
     }
   }
 
   unitChanged(): void {
-    if (this.data.unit != "") {
-      this.unitChoosen = true;
+    if (this.data.unit !== '') {
+      this.unitChosen = true;
     } else {
-      this.unitChoosen = false;
+      this.unitChosen = false;
     }
   }
 }

@@ -80,8 +80,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
         keycloak.init({
             config: {
                 url: environment.auth.URL,
-                realm: 'Voc-Realm',
-                clientId: 'voc-angular-application'
+                realm: environment.auth.REALM,
+                clientId: environment.auth.CLIENT_ID
             },
             initOptions: {
                 onLoad: 'check-sso',

@@ -1,6 +1,6 @@
 import { Action } from '../interfaces/action';
 import { Injectable } from '@angular/core';
-import { ClasOption, IVocabulary, UnitOption, Vocabulary } from '../interfaces/vocabulary';
+import { ClassOption, IVocabulary, UnitOption, Vocabulary } from '../interfaces/vocabulary';
 import { ActionMethod } from '../interfaces/action';
 import { DbFunctionService } from './db-function.service';
 import { LocalStorageNamespace } from './local-storage.namespace';
@@ -15,7 +15,6 @@ export class VocabularyDbService {
   }
 
   async addVocabulary(voc: IVocabulary) {
-    voc.id = LocalStorageNamespace.getNextPrimaryId();
     return await this.dbFunctions.insertVocabularyJustDb(voc).catch(err => {
       console.error(err);
       throw new Error(err);
@@ -37,26 +36,23 @@ export class VocabularyDbService {
     return dbResults;
   }
 
-  async editVocabulary(voc: Vocabulary): Promise<Action> {
-    const oldresult = await this.getVocabularybyId(voc.id);
-    console.log('oldResult', oldresult[0]);
-    this.dbFunctions.updateVocabularyJustDb(voc).catch(err => {
+  async editVocabulary(voc: Vocabulary) {
+    return await this.dbFunctions.updateVocabularyJustDb(voc).catch(err => {
       console.error(err);
       throw new Error(err);
     });
-    return new Action(null, ActionMethod.UPDATE, oldresult[0] as IVocabulary, voc);
   }
 
   async deleteVocabulary(voc: Vocabulary) {
     await this.dbFunctions.deleteVocabularyJustDb(voc);
   }
 
-  getClases(): Promise<ClasOption[]> {
-    return this.dbFunctions.getClases();
+  getClasses(): Promise<ClassOption[]> {
+    return this.dbFunctions.getClasses();
   }
 
-  getUnits(clas: string): Promise<UnitOption[]> {
-    return this.dbFunctions.getUnits(clas);
+  getUnits(class_: string): Promise<UnitOption[]> {
+    return this.dbFunctions.getUnits(class_);
   }
 
   getVocabularybyId(id: number): Promise<unknown[]> {
@@ -67,12 +63,12 @@ export class VocabularyDbService {
     return this.dbFunctions.getAllVocs();
   }
 
-  getVocsFromOneUnit(clas: string, unit: string): Promise<any> {
-    return this.dbFunctions.getVocsFromOneUnit(clas, unit);
+  getVocsFromOneUnit(class_: string, unit: string): Promise<any> {
+    return this.dbFunctions.getVocsFromOneUnit(class_, unit);
   }
 
-  getVocsFromOneClas(clas: string): Promise<any> {
-    return this.dbFunctions.getVocsFromOneClas(clas);
+  getVocsFromOneClass(class_: string): Promise<any> {
+    return this.dbFunctions.getVocsFromOneClass(class_);
   }
 
   getAllVocsCount(): Promise<number> {

@@ -11,7 +11,7 @@
 		<i class="material-icons" style=" line-height: 32px;font-size: 32px;">add</i>
 	</span>
 </div>
-				
+
 <div style='clear: both;'>
 </div>
 
@@ -27,12 +27,12 @@
 	<tbody>
 		<tr *ngFor="let voc of vocs.data; let i = index" (click)="vocPressed(voc)">
 			<th scope="row">{{i + 1}}</th>
-			<td>{{voc.primaryLanguage}}</td>
-			<td>{{voc.secondaryLanguage}}</td>
+			<td>{{voc.primary_language}}</td>
+			<td>{{voc.secondary_language}}</td>
 		</tr>
 	</tbody>
 </table>
-	
+
 <script type="text/javascript">
 	window.onload = function() {
 		document.getElementById("PrimaryLanguage").focus();

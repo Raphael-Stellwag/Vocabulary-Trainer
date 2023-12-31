@@ -2,15 +2,15 @@
 <h1 mat-dialog-title>Which unit you want to {{input.reason}}?</h1>
 <div mat-dialog-content>
   <mat-form-field>
-    <mat-select placeholder="Class to {{input.reason}}" [(value)]="choosenUnit.clas" (selectionChange)="clasChanged()">
-      <mat-option *ngFor="let option of clasOptions" [value]="option.clas">
-        {{option.clas}}
+    <mat-select placeholder="Class to {{input.reason}}" [(value)]="chosenUnit.class" (selectionChange)="clasChanged()">
+      <mat-option *ngFor="let option of classOptions" [value]="option.class">
+        {{option.class}}
       </mat-option>
     </mat-select>
   </mat-form-field>
   <br>
   <mat-form-field>
-    <mat-select placeholder="Unit to {{input.reason}}" [disabled]="!clasChoosen" [(value)]="choosenUnit.unit">
+    <mat-select placeholder="Unit to {{input.reason}}" [disabled]="!classChosen" [(value)]="chosenUnit.unit">
         <mat-option>All</mat-option>
         <mat-option *ngFor="let option of unitOptions" [value]="option.unit">
           {{option.unit}}
@@ -20,7 +20,6 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="cancelClicked()">Cancel</button>
-  <button mat-button (click)="okClicked()" [disabled]="!clasChoosen">Ok</button>
+  <button mat-button (click)="okClicked()" [disabled]="!classChosen">Ok</button>
 </div>
 
-  

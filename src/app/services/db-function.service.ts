@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ClasOption, IVocabulary, UnitOption } from '../interfaces/vocabulary';
+import { ClassOption, IVocabulary, UnitOption } from '../interfaces/vocabulary';
 import { InitDbService } from './init-db.service';
 
 @Injectable({
@@ -28,13 +28,13 @@ export class DbFunctionService extends InitDbService {
     });
   }
 
-  getClases() {
+  getClasses() {
     return this.connection.select({ from: this.tableName, groupBy: this.colClas, order:
-          {by: this.colClas, type: 'asc', idbSorting: false}}) as Promise<ClasOption[]>;
+          {by: this.colClas, type: 'asc', idbSorting: false}}) as Promise<ClassOption[]>;
   }
 
   getUnits(clas: string): Promise<UnitOption[]> {
-    return this.connection.select({from: this.tableName, where: {clas: clas}, groupBy: this.colUnit, order:
+    return this.connection.select({from: this.tableName, where: {class: clas}, groupBy: this.colUnit, order:
           {by: this.colUnit, type: 'asc', idbSorting: false}}) as Promise<UnitOption[]>;
   }
 
@@ -51,12 +51,12 @@ export class DbFunctionService extends InitDbService {
   }
 
   getVocsFromOneUnit(clas: string, unit: string): Promise<any> {
-    return this.connection.select({from: this.tableName, where: {clas: clas, unit: unit}, order:
+    return this.connection.select({from: this.tableName, where: {class: clas, unit: unit}, order:
           {by: this.colId, type: 'ASC', idbSorting: false}});
   }
 
-  getVocsFromOneClas(clas: string): Promise<any> {
-    return this.connection.select({from: this.tableName, where: {clas: clas}, order: {by: this.colId, type: 'ASC', idbSorting: false}});
+  getVocsFromOneClass(clas: string): Promise<any> {
+    return this.connection.select({from: this.tableName, where: {class: clas}, order: {by: this.colId, type: 'ASC', idbSorting: false}});
   }
 
   async getAllVocsCount(): Promise<number> {

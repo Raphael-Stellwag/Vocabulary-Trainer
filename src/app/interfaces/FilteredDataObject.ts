@@ -1,7 +1,7 @@
-import { Vocabulary } from "./vocabulary";
+import { Vocabulary } from './vocabulary';
 
 export class FilteredDataObject {
-    clas: string;
+    class: string;
     unit: string;
     data: Vocabulary[];
 
@@ -9,4 +9,4 @@ export class FilteredDataObject {
         this.data = [];
     }
 }
-  
+

@@ -8,7 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 })
 export class DialogAddVocabularyComponent {
 
-  constructor(public dialogRef: MatDialogRef<DialogAddVocabularyComponent>, @Inject(MAT_DIALOG_DATA) public voc) { 
+  constructor(public dialogRef: MatDialogRef<DialogAddVocabularyComponent>, @Inject(MAT_DIALOG_DATA) public voc) {
   }
 
   cancelClicked(): void {

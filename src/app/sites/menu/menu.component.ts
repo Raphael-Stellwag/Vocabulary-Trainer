@@ -24,7 +24,7 @@ export class SiteMenuComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result != null) {
-        const link = ['../change', result.clas, result.unit];
+        const link = ['../change', result.class, result.unit];
         this.router.navigate(link);
       }
     });
@@ -40,14 +40,14 @@ export class SiteMenuComponent {
         width: '250px',
         data: { reason: "train" }
       });
-  
+
       dialogRef.afterClosed().subscribe(result => {
         if (result != null) {
           let link;
           if (result.unit == null) {
-            link = ['../query', result.clas];
+            link = ['../query', result.class];
           } else {
-            link = ['../query', result.clas, result.unit];
+            link = ['../query', result.class, result.unit];
           }
           this.router.navigate(link);
         }

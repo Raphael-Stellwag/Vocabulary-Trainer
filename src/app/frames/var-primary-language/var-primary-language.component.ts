@@ -7,18 +7,18 @@ import { LocalStorageNamespace} from '../../services/local-storage.namespace';
   styleUrls: ['./var-primary-language.component.css']
 })
 export class VarPrimaryLanguageComponent implements OnInit, AfterViewInit {
-  primaryLanguage: string = "";
-  @Input() editable: boolean = false;
+  primaryLanguage = '';
+  @Input() editable = false;
   @ViewChildren('primaryLanguage') editableDiv;
 
   constructor() { }
 
   ngOnInit(): void {
     this.primaryLanguage = LocalStorageNamespace.getPrimaryLanguage();
-    
+
     document.addEventListener(LocalStorageNamespace.localStoragePrimaryLanguageKey, function(e) {
       this.primaryLanguage = LocalStorageNamespace.getPrimaryLanguage();
-    });  
+    });
   }
 
   ngAfterViewInit() {

@@ -11,22 +11,22 @@ import { VocabularyService } from 'src/app/services/vocabulary.service';
 })
 export class DialogEditVocabularyComponent {
   private data: Vocabulary;
-  private saved: boolean = false;
+  private saved = false;
 
   constructor(
     public dialogRef: MatDialogRef<DialogEditVocabularyComponent>,
     @Inject(MAT_DIALOG_DATA) public voc: Vocabulary,
-     private vocService: VocabularyService, private snackBar: MatSnackBar) {  
+     private vocService: VocabularyService, private snackBar: MatSnackBar) {
        this.data = Vocabulary.createCorrectReference(voc);
-       let _this = this;
+       const _this = this;
        dialogRef.beforeClosed().subscribe(res => {
           if (res != true) {
-            _this.voc.primaryLanguage = _this.data.primaryLanguage;
-            _this.voc.secondaryLanguage = _this.data.secondaryLanguage;
+            _this.voc.primary_language = _this.data.primary_language;
+            _this.voc.secondary_language = _this.data.secondary_language;
             _this.voc.id = _this.data.id;
             _this.voc.unit = _this.data.unit;
           }
-       })
+       });
   }
 
   cancelClicked(): void {
@@ -37,11 +37,11 @@ export class DialogEditVocabularyComponent {
     this.saved = true;
     this.vocService.editVocabulary(this.voc).then(() => {
       this.dialogRef.close(true);
-      this.snackBar.open("Vocabulary successfully edited" , null, {duration:2000});
+      this.snackBar.open('Vocabulary successfully edited' , null, {duration: 2000});
     }).catch(err => {
       this.dialogRef.close(false);
-      console.log(err)
-      this.snackBar.open("Failed to edit Vocabulary" , null, {duration:2000})
+      console.log(err);
+      this.snackBar.open('Failed to edit Vocabulary' , null, {duration: 2000});
     });
   }
 }

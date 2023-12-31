@@ -8,8 +8,10 @@ export const environment = {
   production: false,
   auth: {
     URL: 'http://localhost:8180/auth',
+    REALM: 'Voc-Realm',
+    CLIENT_ID: 'voc-angular-application',
   },
   vocabulary_server: {
-    URL: 'http://localhost:8080/v1/actions',
+    URL: 'http://localhost:8080/api/v1/vocabulary',
   }
 };

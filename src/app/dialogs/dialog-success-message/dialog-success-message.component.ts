@@ -10,7 +10,7 @@ export class DialogSuccessMessageComponent {
 
   constructor(public dialogRef: MatDialogRef<DialogSuccessMessageComponent>) {}
 
-  public successMessage:string;
-  public successTitle:string;
+  public successMessage: string;
+  public successTitle: string;
 
 }

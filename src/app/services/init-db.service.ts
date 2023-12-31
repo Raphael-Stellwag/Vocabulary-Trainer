@@ -12,12 +12,12 @@ export class InitDbService {
   private dbName = 'Ts_Vocabulary';
   protected tableName = 'Vocabulary';
   protected colId = 'id';
-  protected colClas = 'clas';
+  protected colClas = 'class';
   protected colUnit = 'unit';
-  protected colPrimaryLanguage = 'primaryLanguage';
-  protected colSecondaryLanguage = 'secondaryLanguage';
-  protected colTries = 'tries';
-  protected colFailuresCount = 'failuresCount';
+  protected colPrimaryLanguage = 'primary_language';
+  protected colSecondaryLanguage = 'secondary_language';
+  protected colSuccessCount = 'success_count';
+  protected colFailuresCount = 'failures_count';
 
   constructor() {
     // initiate database when a service instance is initiated
@@ -61,7 +61,7 @@ export class InitDbService {
           primaryKey: true,
           autoIncrement: false
         },
-        clas:
+        class:
         {
           dataType: DATA_TYPE.String,
           notNull: true
@@ -71,23 +71,23 @@ export class InitDbService {
           dataType: DATA_TYPE.String,
           notNull: true
         },
-        primaryLanguage:
+        primary_language:
         {
           notNull: true,
           dataType: DATA_TYPE.String
         },
-        secondaryLanguage:
+        secondary_language:
         {
           dataType: DATA_TYPE.String,
           notNull: true
         },
-        tries:
+        success_count:
         {
           dataType: DATA_TYPE.Number,
           notNull: true,
           default: '0'
         },
-        failuresCount:
+        failures_count:
         {
           dataType: DATA_TYPE.Number,
           notNull: true,

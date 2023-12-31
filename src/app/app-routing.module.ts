@@ -10,10 +10,10 @@ import {KeycloakGuard} from './keycloak.guard';
 
 const routes: Routes = [
       { path: '', component: SiteMenuComponent},
-      { path: 'query/:clas/:unit', component: SiteQueryComponent},
-      { path: 'query/:clas', component: SiteQueryComponent},
+      { path: 'query/:class/:unit', component: SiteQueryComponent},
+      { path: 'query/:class', component: SiteQueryComponent},
       { path: 'search', component: SiteSearchComponent},
-      { path: 'change/:clas/:unit', component: SiteChangeComponent},
+      { path: 'change/:class/:unit', component: SiteChangeComponent},
       { path: 'settings/impressum', component: ImpressumComponent },
       { path: 'settings', component: SiteSettingsComponent },
       { path: '**', redirectTo: ''}];
