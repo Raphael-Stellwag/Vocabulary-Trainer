@@ -16,7 +16,7 @@ export class SiteQueryComponent implements OnInit {
   private unit: string;
   private unitSetted = true;
   public vocsToQuery: IVocabulary[] = [{primary_language: '', success_count: 0, class: '', unit: '', secondary_language: '', failures_count: 0,
-    deleted: false, last_changed: new Date().toISOString()}];
+    deleted: false, last_changed: new Date()}];
   private correct = 0;
   private failures = 0;
   public index = 0;

@@ -1,15 +1,15 @@
 export interface IVocabulary {
-    id?;
-    success_count;
-    failures_count;
+    id?: string;
+    success_count: number;
+    failures_count: number;
 
-    class;
-    unit;
-    primary_language;
-    secondary_language;
+    class: string;
+    unit: string;
+    primary_language: string;
+    secondary_language: string;
 
-    last_changed;
-    deleted;
+    last_changed: Date;
+    deleted: boolean;
 }
 
 export interface UnitOption {
@@ -21,20 +21,21 @@ export interface ClassOption {
 }
 
 export class Vocabulary implements IVocabulary {
-    id;
-    success_count;
-    failures_count;
+    id: string;
+    success_count: number;
+    failures_count: number;
 
-    class;
-    unit;
-    primary_language;
-    secondary_language;
+    class: string;
+    unit: string;
+    primary_language: string;
+    secondary_language: string;
 
-    last_changed;
-    deleted;
+    last_changed: Date;
+    deleted = false;
 
     constructor(new_id?, new_success_count?, new_failures_count?, new_class?, new_unit?, new_primary_language?, new_secondary_language?,
                 new_last_changed?, new_deleted?) {
+
         this.id = new_id;
         this.success_count = new_success_count;
         this.failures_count = new_failures_count;
@@ -47,8 +48,13 @@ export class Vocabulary implements IVocabulary {
     }
 
     private static createNewObject(context: IVocabulary) {
-        return new Vocabulary(context.id, context.success_count, context.failures_count, context.class, context.unit,
+        const voc = new Vocabulary(context.id, context.success_count, context.failures_count, context.class, context.unit,
             context.primary_language, context.secondary_language, context.last_changed, context.deleted);
+
+        if (voc.deleted !== false && voc.deleted !== true) {
+            voc.deleted = false;
+        }
+        return voc;
     }
 
     static createCorrectReferences(vocs: IVocabulary[]) {

@@ -35,6 +35,7 @@ export class Action implements IAction {
         }
     }
 
+    /*
     static findVocabularyId(action: Action): number {
         switch (action.method) {
             case ActionMethod.ADD:
@@ -48,6 +49,8 @@ export class Action implements IAction {
                 break;
         }
     }
+
+     */
 
     static deserializeVocabularies(action): Action {
         if (action.vocabularyBeforeAction != null) {
