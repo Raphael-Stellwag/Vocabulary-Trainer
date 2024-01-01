@@ -51,7 +51,7 @@ export class SiteChangeComponent implements OnInit, OnDestroy {
   }
 
   addClicked() {
-    const voc = new Vocabulary(null, 0, 0, this.class, this.unit, null, null);
+    const voc = new Vocabulary(null, 0, 0, this.class, this.unit, null, null, new Date(), false, true);
 
     const dialogRef = this.dialog.open(DialogAddVocabularyComponent, {
       width: '250px',

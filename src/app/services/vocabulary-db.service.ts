@@ -4,6 +4,7 @@ import {ClassOption, IVocabulary, UnitOption, Vocabulary} from '../interfaces/vo
 import {ActionMethod} from '../interfaces/action';
 import {DbFunctionService} from './db/db-function.service';
 import {LocalStorageNamespace} from './local-storage.namespace';
+import {VocabularyService} from './vocabulary.service';
 
 
 @Injectable({
@@ -58,7 +59,7 @@ export class VocabularyDbService {
         return await this.dbFunctions.getUnits(class_);
     }
 
-    async getVocabularybyId(id: number) {
+    async getVocById(id: string) {
         return await this.dbFunctions.getVocById(id);
     }
 
@@ -78,4 +79,28 @@ export class VocabularyDbService {
         return await this.dbFunctions.getAllVocsCount();
     }
 
+    async updateVocs(vocUpdatesSinceDate: Vocabulary[]) {
+        if (!Array.isArray(vocUpdatesSinceDate) || vocUpdatesSinceDate.length === 0) {
+            return;
+        }
+
+        for (const voc of vocUpdatesSinceDate) {
+            const foundVocsInDb = await this.getVocById(voc.id);
+
+            if (foundVocsInDb.length === 0) {
+                await this.addVocabulary(voc);
+            } else {
+                const dbVoc = foundVocsInDb[0];
+                if (voc.last_changed < dbVoc.last_changed) {
+                    // db update is newer --> will be pushed separately
+                } else {
+                    await this.editVocabulary(voc);
+                }
+            }
+        }
+    }
+
+    async getNotSyncedVocs() {
+        return await this.dbFunctions.getNotSyncedVocs();
+    }
 }

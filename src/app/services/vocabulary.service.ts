@@ -3,8 +3,8 @@ import {FilteredDataObject} from '../interfaces/FilteredDataObject';
 import {VocabularyDbService} from './vocabulary-db.service';
 import {IVocabulary, Vocabulary} from '../interfaces/vocabulary';
 import {Injectable} from '@angular/core';
-import {ActionMethod} from '../interfaces/action';
 import * as uuid from 'uuid';
+import {LocalStorageNamespace} from './local-storage.namespace';
 
 @Injectable({
     providedIn: 'root'
@@ -19,7 +19,7 @@ export class VocabularyService {
         voc.last_changed = new Date();
         const vocWithId = await this.restService.postVocabulary(voc);
         if (vocWithId === null) {
-            voc.id = 'LOKAL' + uuid.v5();
+            voc.id = 'LOKAL_' + uuid.v4();
         } else {
             voc = vocWithId;
         }
@@ -60,15 +60,50 @@ export class VocabularyService {
 
     }
 
-    //TODO: Fix
+    // TODO: Fix
     async sync() {
-        const result = await this.restService.sync();
+
+        const date_before_update = new Date();
+
+        // Get All Remote Ids
+        // If there is a local Id (which is synced = true) with no corresponding remote Id --> delete Voc local
+        // TODO: Implement
+
+        // Get Remote Vocs (changed since last successful sync) --> Date of last sync needs to be saved in Localstorage
+        // Get corresponding local Vocs and update them if (last update from remote newer than local one)
+        const lastSyncDate = LocalStorageNamespace.getLastSyncDate();
+        const vocUpdatesSinceDate = await this.restService.getVocUpdatesSinceDate(lastSyncDate);
+        await this.dbService.updateVocs(vocUpdatesSinceDate);
+
+        // TODO: handle deleted Remote Vocs???
+
+        // Get Local Vocs (with flag synced = false) --> post (if id starts with LOKAL_) / put / delete (delete Flag) remote vocs
+        // Update Db (remove sync flag / delete vocs which are flagged for delete)
+        const dbVocs = await this.dbService.getNotSyncedVocs();
+
+        for (const voc of Vocabulary.createCorrectReferences(dbVocs)) {
+            if (voc.deleted === true) {
+                await this.restService.deleteVocabulary(voc);
+                await this.dbService.deleteVocabulary(voc);
+            } else {
+                if (voc.id.startsWith('LOKAL_')) {
+                    const newVoc = await this.restService.postVocabulary(voc);
+                    await this.dbService.deleteVocabulary(voc);
+                    await this.dbService.addVocabulary(newVoc);
+                } else {
+                    const newVoc = await this.restService.putVocabulary(voc);
+                    await this.dbService.editVocabulary(newVoc);
+                }
+            }
+        }
+
         await this.updateCurrentUsedFilteredDataObjects();
-        return result;
+
+        LocalStorageNamespace.setLastSyncDate(date_before_update);
     }
 
     async addBulkVocabulary(vocs: Vocabulary[]) {
-        //TODO: FIX const dbResults = await this.dbService.addBulkVocabulary(vocs);
+        // TODO: FIX const dbResults = await this.dbService.addBulkVocabulary(vocs);
         /*
         for (const dbResult of dbResults) {
             this.restService.saveActionForLaterPush(ActionMethod.ADD, null, dbResult);

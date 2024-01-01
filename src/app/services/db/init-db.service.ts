@@ -95,9 +95,15 @@ export class InitDbService {
                     },
                 deleted:
                     {
-                        dataType: DATA_TYPE.Boolean,
+                        dataType: DATA_TYPE.String,
                         notNull: true,
                         default: 'false'
+                    },
+                synced:
+                    {
+                        dataType: DATA_TYPE.String,
+                        notNull: true,
+                        default: 'true'
                     }
             }
         };
