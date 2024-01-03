@@ -103,4 +103,17 @@ export class VocabularyDbService {
     async getNotSyncedVocs() {
         return await this.dbFunctions.getNotSyncedVocs();
     }
+
+    async deleteVocsNotInList(remoteIds: Set<string>) {
+        const localVocs = await this.getAllVocs();
+
+        const promises: Promise<number>[] = [];
+        for (const localVoc of localVocs) {
+            if (!remoteIds.has(localVoc.id) && localVoc.synced) {
+                promises.push(this.deleteVocabulary(localVoc));
+            }
+        }
+
+        await Promise.all(promises);
+    }
 }

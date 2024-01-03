@@ -69,15 +69,14 @@ export class VocabularyService {
 
         // Get All Remote Ids
         // If there is a local Id (which is synced = true) with no corresponding remote Id --> delete Voc local
-        // TODO: Implement
+        const remoteIds = await this.restService.getAllVocIds();
+        await this.dbService.deleteVocsNotInList(remoteIds);
 
         // Get Remote Vocs (changed since last successful sync) --> Date of last sync needs to be saved in Localstorage
         // Get corresponding local Vocs and update them if (last update from remote newer than local one)
         const lastSyncDate = LocalStorageNamespace.getLastSyncDate();
         const vocUpdatesSinceDate = await this.restService.getVocUpdatesSinceDate(lastSyncDate);
         await this.dbService.updateVocs(vocUpdatesSinceDate);
-
-        // TODO: handle deleted Remote Vocs???
 
         // Get Local Vocs (with flag synced = false) --> post (if id starts with LOKAL_) / put / delete (delete Flag) remote vocs
         // Update Db (remove sync flag / delete vocs which are flagged for delete)
@@ -239,7 +238,9 @@ export class VocabularyService {
             promises.push(this.dbService.deleteVocabulary(voc));
         }
 
-        Promise.all(promises);
+        LocalStorageNamespace.setLastSyncDate(new Date(0));
+
+        await Promise.all(promises);
 
         return allVocs.length;
     }

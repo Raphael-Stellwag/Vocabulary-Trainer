@@ -90,17 +90,28 @@ export class VocabularyRestService {
         return vocs;
     }
 
-    //TODO: Implement in Backend
+    // TODO: Implement in Backend
     async getVocUpdatesSinceDate(lastSyncDate: Date) {
         if (!await this.canReachTheBackend()) {
             return null;
         }
 
-        const params = new HttpParams().set('from_last_update_date', lastSyncDate.toISOString());
+        const params = new HttpParams().set('from_last_changed', lastSyncDate.toISOString());
 
         const object = await this.httpClient.get(environment.vocabulary_server.URL,
             {headers: this.getHeaders(), params: params}).toPromise() as any;
 
         return this.dtosToVocabularies(object.list);
+    }
+
+    async getAllVocIds(): Promise<Set<string>> {
+        if (!await this.canReachTheBackend()) {
+            return null;
+        }
+
+        const object = await this.httpClient.get(environment.vocabulary_server.URL + '/ids',
+            {headers: this.getHeaders()}).toPromise() as any;
+
+        return new Set(object.ids);
     }
 }
