@@ -62,7 +62,6 @@ export class VocabularyService {
 
     }
 
-    // TODO: Fix
     async sync() {
 
         const date_before_update = new Date();

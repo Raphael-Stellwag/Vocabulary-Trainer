@@ -90,7 +90,6 @@ export class VocabularyRestService {
         return vocs;
     }
 
-    // TODO: Implement in Backend
     async getVocUpdatesSinceDate(lastSyncDate: Date) {
         if (!await this.canReachTheBackend()) {
             return null;
