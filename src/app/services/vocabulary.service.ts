@@ -20,10 +20,12 @@ export class VocabularyService {
         const vocWithId = await this.restService.postVocabulary(voc);
         if (vocWithId === null) {
             voc.id = 'LOKAL_' + uuid.v4();
+            voc.synced = false;
         } else {
             voc = vocWithId;
+            voc.synced = true;
         }
-        voc = Vocabulary.createCorrectReference(voc);
+        // voc = Vocabulary.createCorrectReference(voc);
         const result = await this.dbService.addVocabulary(voc);
 
         this.addVocToAllFilteredDataObjects(voc);
@@ -220,5 +222,25 @@ export class VocabularyService {
         } else {
             return (filteredDataObject.class === voc.class && filteredDataObject.unit === voc.unit);
         }
+    }
+
+    async deleteAllVocabularies() {
+        const allVocs = await this.dbService.getAllVocs();
+        const promises = [];
+
+        for (const voc of allVocs) {
+            if (!(voc.deleted || voc.id.startsWith('LOKAL_'))) {
+                try {
+                    promises.push(this.restService.deleteVocabulary(voc));
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+            promises.push(this.dbService.deleteVocabulary(voc));
+        }
+
+        Promise.all(promises);
+
+        return allVocs.length;
     }
 }

@@ -13,6 +13,7 @@ import {LoadingSpinnerComponent} from 'src/app/frames/loading-spinner/loading-sp
 import {Overlay} from '@angular/cdk/overlay';
 import {ComponentPortal} from '@angular/cdk/portal';
 import {VocabularyRestService} from 'src/app/services/vocabulary-rest.service';
+import {DialogConfirmationComponent} from '../../dialogs/dialog-confirmation/dialog-confirmation.component';
 
 
 @Component({
@@ -84,7 +85,7 @@ export class SiteSettingsComponent implements OnInit {
                                 voc.Wort_Englisch,
                                 new Date(),
                                 false,
-                                true));
+                                false));
                         }
                     }
                 } else {
@@ -141,5 +142,21 @@ export class SiteSettingsComponent implements OnInit {
         if (loggedIn) {
             this.userId = this.auth.getUsername();
         }
+    }
+
+    async deleteAllVocs() {
+        let dialogRef = this.dialog.open(DialogConfirmationComponent, {
+            disableClose: false
+        });
+        dialogRef.componentInstance.confirmMessage = 'Are you sure you want to delete all Vocabularies?';
+
+        dialogRef.afterClosed().toPromise().then(result => {
+            if (result) {
+                this.vocService.deleteAllVocabularies().then((number) => {
+                    this.snackBar.open(number + ' Vocabularies successfully deleted' , null, {duration: 2000});
+                }).catch(err => this.snackBar.open(JSON.parse(err) , null, {duration: 2000}));
+            }
+            dialogRef = null;
+        });
     }
 }

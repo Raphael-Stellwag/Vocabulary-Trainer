@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ClassOption, IDbVocabulary, IVocabulary, UnitOption} from '../../interfaces/vocabulary';
+import {ClassOption, IDbVocabulary, IVocabulary, UnitOption, Vocabulary} from '../../interfaces/vocabulary';
 import {InitDbService} from './init-db.service';
 
 @Injectable({
@@ -53,7 +53,7 @@ export class DbFunctionService extends InitDbService {
         });
     }
 
-    async getVocById(id: string): Promise<IVocabulary[]> {
+    async getVocById(id: string): Promise<Vocabulary[]> {
         const vocs = await this.connection.select({
             from: this.tableName,
             where: {id: id}
@@ -62,7 +62,7 @@ export class DbFunctionService extends InitDbService {
         return this.toNormalVocs(vocs);
     }
 
-    async getAllVocs(): Promise<IVocabulary[]> {
+    async getAllVocs(): Promise<Vocabulary[]> {
         const vocs = await this.connection.select({
             from: this.tableName,
             where: {deleted: 'false'}
@@ -71,7 +71,7 @@ export class DbFunctionService extends InitDbService {
         return this.toNormalVocs(vocs);
     }
 
-    async getVocsFromOneUnit(class_: string, unit: string): Promise<IVocabulary[]> {
+    async getVocsFromOneUnit(class_: string, unit: string): Promise<Vocabulary[]> {
         const vocs = await this.connection.select({
             from: this.tableName,
             where: {class: class_, unit: unit, deleted: 'false'},
@@ -81,7 +81,7 @@ export class DbFunctionService extends InitDbService {
         return this.toNormalVocs(vocs);
     }
 
-    async getVocsFromOneClass(class_: string): Promise<IVocabulary[]> {
+    async getVocsFromOneClass(class_: string): Promise<Vocabulary[]> {
         const vocs =  await this.connection.select({
             from: this.tableName,
             where: {class: class_, deleted: 'false'},
@@ -98,7 +98,7 @@ export class DbFunctionService extends InitDbService {
         });
     }
 
-    async getNotSyncedVocs(): Promise<IVocabulary[]> {
+    async getNotSyncedVocs(): Promise<Vocabulary[]> {
         const vocs = await this.connection.select({
             from: this.tableName,
             where: {synced: 'false'}
@@ -114,16 +114,16 @@ export class DbFunctionService extends InitDbService {
         return dbVoc;
     }
 
-    private toNormalVocs(vocs: IDbVocabulary[]): IVocabulary[] {
-        const normalVocs: IVocabulary[] = [];
+    private toNormalVocs(vocs: IDbVocabulary[]): Vocabulary[] {
+        const normalVocs: Vocabulary[] = [];
         for (const voc of vocs) {
             normalVocs.push(this.toNormalVoc(voc));
         }
         return normalVocs;
     }
 
-    private toNormalVoc(voc: IDbVocabulary): IVocabulary {
-        const normalVoc = voc as unknown as IVocabulary;
+    private toNormalVoc(voc: IDbVocabulary): Vocabulary {
+        const normalVoc = voc as unknown as Vocabulary;
         normalVoc.synced = (voc.synced === 'true');
         normalVoc.deleted = (voc.deleted === 'true');
         return normalVoc;
