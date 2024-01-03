@@ -2,10 +2,8 @@ import {InternetConnectionService} from './internet-connection.service';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {AuthService} from './auth.service';
-import {IVocabulary, Vocabulary} from '../interfaces/vocabulary';
-import {LocalStorageNamespace} from './local-storage.namespace';
+import {IRestVocabulary, Vocabulary} from '../interfaces/vocabulary';
 import {environment} from 'src/environments/environment';
-import {Action, ActionMethod, IAction} from '../interfaces/action';
 import {DbFunctionService} from './db/db-function.service';
 
 
@@ -27,8 +25,8 @@ export class VocabularyRestService {
             return null;
         }
 
-        const result = await this.httpClient.post(environment.vocabulary_server.URL, JSON.stringify(voc),
-            {headers: this.getHeaders()}).toPromise() as IVocabulary;
+        const result = await this.httpClient.post(environment.vocabulary_server.URL,
+            JSON.stringify(voc), {headers: this.getHeaders()}).toPromise() as IRestVocabulary;
 
         console.log(result);
         if (result !== null) {
@@ -43,8 +41,8 @@ export class VocabularyRestService {
             return null;
         }
 
-        const result = await this.httpClient.put(environment.vocabulary_server.URL + '/' + voc.id, JSON.stringify(voc),
-            {headers: this.getHeaders()}).toPromise() as IVocabulary;
+        const result = await this.httpClient.put(environment.vocabulary_server.URL + '/' + voc.id,
+            JSON.stringify(voc), {headers: this.getHeaders()}).toPromise() as IRestVocabulary;
 
         console.log(result);
         if (result !== null) {
@@ -71,7 +69,7 @@ export class VocabularyRestService {
             .set('Accept', 'application/json');
     }
 
-    private dtoToVocabulary(dto: IVocabulary): Vocabulary {
+    private dtoToVocabulary(dto: IRestVocabulary): Vocabulary {
         return new Vocabulary(dto.id,
             dto.success_count,
             dto.failures_count,
@@ -84,9 +82,9 @@ export class VocabularyRestService {
             true);
     }
 
-    private dtosToVocabularies(dtos): Vocabulary[] {
+    private dtosToVocabularies(dtos: IRestVocabulary[]): Vocabulary[] {
         const vocs: Vocabulary[] = [];
-        for (const dto of dtos.list) {
+        for (const dto of dtos) {
             vocs.push(this.dtoToVocabulary(dto));
         }
         return vocs;
@@ -103,6 +101,6 @@ export class VocabularyRestService {
         const object = await this.httpClient.get(environment.vocabulary_server.URL,
             {headers: this.getHeaders(), params: params}).toPromise() as any;
 
-        return this.dtosToVocabularies(object);
+        return this.dtosToVocabularies(object.list);
     }
 }

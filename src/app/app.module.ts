@@ -68,7 +68,7 @@ import { DialogConfirmationComponent } from './dialogs/dialog-confirmation/dialo
 import { DialogEditVocabularyComponent } from './dialogs/dialog-edit-vocabulary/dialog-edit-vocabulary.component'
 import { AuthService } from './services/auth.service';
 import { LoadingSpinnerComponent } from './frames/loading-spinner/loading-spinner.component';
-import { FullscreenOverlayContainer, OverlayContainer} from '@angular/cdk/overlay';
+import { FullscreenOverlayContainer} from '@angular/cdk/overlay';
 
 import { DialogErrorMessageComponent } from './dialogs/dialog-error-message/dialog-error-message.component';
 import { DialogSuccessMessageComponent } from './dialogs/dialog-success-message/dialog-success-message.component';

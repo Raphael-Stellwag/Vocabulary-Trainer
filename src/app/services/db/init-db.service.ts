@@ -12,7 +12,7 @@ export class InitDbService {
     private dbName = 'Ts_Vocabulary';
     protected tableName = 'Vocabulary';
     protected colId = 'id';
-    protected colClas = 'class';
+    protected colClass = 'class';
     protected colUnit = 'unit';
     protected colPrimaryLanguage = 'primary_language';
     protected colSecondaryLanguage = 'secondary_language';

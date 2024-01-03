@@ -13,6 +13,34 @@ export interface IVocabulary {
     synced: boolean;
 }
 
+export interface IDbVocabulary {
+    id?: string;
+    success_count: number;
+    failures_count: number;
+
+    class: string;
+    unit: string;
+    primary_language: string;
+    secondary_language: string;
+
+    last_changed: Date;
+    deleted: string;
+    synced: string;
+}
+
+export interface IRestVocabulary {
+    id?: string;
+    success_count: number;
+    failures_count: number;
+
+    class: string;
+    unit: string;
+    primary_language: string;
+    secondary_language: string;
+
+    last_changed: string;
+}
+
 export interface UnitOption {
     unit: string;
 }
@@ -73,7 +101,7 @@ export class Vocabulary implements IVocabulary {
         return newVocs;
     }
 
-    static createCorrectReference(voc: IVocabulary) {
+    static createCorrectReference(voc: IVocabulary): Vocabulary {
         return this.createNewObject(voc);
     }
 

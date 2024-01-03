@@ -103,14 +103,13 @@ export class VocabularyService {
     }
 
     async addBulkVocabulary(vocs: Vocabulary[]) {
-        // TODO: FIX const dbResults = await this.dbService.addBulkVocabulary(vocs);
-        /*
-        for (const dbResult of dbResults) {
-            this.restService.saveActionForLaterPush(ActionMethod.ADD, null, dbResult);
-        }
-        await this.restService.sync();
+        const promises: Promise<Vocabulary>[] = [];
 
-         */
+        for (const voc of vocs) {
+            promises.push(this.addVocabulary(voc));
+        }
+
+        return await Promise.all(promises);
     }
 
     async getVocabularyCount() {
@@ -118,17 +117,17 @@ export class VocabularyService {
     }
 
     /**
-     * Get all Vocabularies for a clas, this array wont be updated automatically as in getAllVocs
-     * @param clas Clas to get Vocabularies for
+     * Get all Vocabularies for a class, this array wont be updated automatically as in getAllVocs
+     * @param class_ Class to get Vocabularies for
      */
-    async getVocsFromOneClas(clas: string): Promise<Vocabulary[]> {
-        const vocs = await this.dbService.getVocsFromOneClass(clas);
+    async getVocsFromOneClas(class_: string): Promise<Vocabulary[]> {
+        const vocs = await this.dbService.getVocsFromOneClass(class_);
         return Vocabulary.createCorrectReferences(vocs);
     }
 
     /**
      * Get all Vocabularies for a unit, this array wont be updated automatically as in getAllVocs
-     * @param class_ Clas to get Vocabularies for
+     * @param class_ Class to get Vocabularies for
      * @param unit unit to get Vocabularies for
      */
     async getVocsFromOneUnit(class_: string, unit: string): Promise<Vocabulary[]> {
