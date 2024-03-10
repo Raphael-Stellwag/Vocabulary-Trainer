@@ -4,11 +4,11 @@ export const environment = {
   version: pkg.version,
   production: true,
   auth: {
-    LOGIN: "https://raphael-stellwag.tk/api/voc-trainer/v1/users/login",
-    REGISTER: "https://raphael-stellwag.tk/api/voc-trainer/v1/users/register",
+    URL: 'http://localhost:8180',
+    REALM: 'Voc-Realm',
+    CLIENT_ID: 'voc-angular-application',
   },
   vocabulary_server: {
-    URL: "https://raphael-stellwag.tk/api/voc-trainer/v1/actions",
-    //URL: "https://www.vocabulary-trainer.ml/vocabulary-trainer/v1/actions",
+    URL: 'http://localhost:8080/api/v1/vocabulary',
   }
 };
