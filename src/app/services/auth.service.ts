@@ -20,6 +20,10 @@ export class AuthService {
     return this.keycloakService.getUsername();
   }
 
+  async getAuthToken() {
+    return await this.keycloakService.getToken()
+  }
+
   async login(): Promise<boolean> {
     await this.keycloakService.login();
     return this.isLoggedIn();
