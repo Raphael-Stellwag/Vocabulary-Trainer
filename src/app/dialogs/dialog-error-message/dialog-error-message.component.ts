@@ -8,8 +8,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class DialogErrorMessageComponent {
 
-  constructor(public dialogRef: MatDialogRef<DialogErrorMessageComponent>) {}
+  constructor(public dialogRef: MatDialogRef<DialogErrorMessageComponent>) { }
 
-  public errorMessage:string;
+  public errorMessage: string;
 
 }

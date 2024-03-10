@@ -2,18 +2,18 @@
 <div mat-dialog-content>
   <table style="overflow-x: auto">
     <tr>
-        <td><app-var-primary-language></app-var-primary-language>:</td>
-        <td>{{data.voc.primary_language}}</td>
+      <td><app-var-primary-language></app-var-primary-language>:</td>
+      <td>{{data.voc.primary_language}}</td>
     </tr>
     <br>
     <tr>
-        <td>Your input:</td>
-        <td>{{data.userInput}} </td>
+      <td>Your input:</td>
+      <td>{{data.userInput}} </td>
     </tr>
     <br>
     <tr>
-        <td>Solution:</td>
-        <td>{{data.voc.secondary_language}} </td>
+      <td>Solution:</td>
+      <td>{{data.voc.secondary_language}} </td>
     </tr>
   </table>
   <br>
@@ -25,4 +25,3 @@
   <button mat-button style="margin-left: 0px;" (click)="okClicked()">Ok</button>
   <button mat-button style="margin-left: 0px;" *ngIf="!correct" (click)="correctClicked()">Nevertheless correct</button>
 </div>
-

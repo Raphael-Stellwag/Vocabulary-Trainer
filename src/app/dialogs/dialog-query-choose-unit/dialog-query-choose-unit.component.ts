@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ChosenUnit } from '../../interfaces/chosen-unit';
 import { VocabularyDbService } from 'src/app/services/vocabulary-db.service';
 import { ClassOption, IVocabulary, UnitOption, Vocabulary } from 'src/app/interfaces/vocabulary';
@@ -20,9 +20,9 @@ export class DialogQueryChooseUnitComponent {
 
   constructor(public dialogRef: MatDialogRef<DialogQueryChooseUnitComponent>,
     private vocService: VocabularyDbService, @Inject(MAT_DIALOG_DATA) public input) {
-      vocService.getClasses().then((classes: ClassOption[]) => {
-        this.classOptions = classes;
-      }).catch(err => console.log('ERR', err));
+    vocService.getClasses().then((classes: ClassOption[]) => {
+      this.classOptions = classes;
+    }).catch(err => console.log('ERR', err));
   }
 
   clasChanged(): void {

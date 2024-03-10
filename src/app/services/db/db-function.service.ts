@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {ClassOption, IDbVocabulary, IVocabulary, UnitOption, Vocabulary} from '../../interfaces/vocabulary';
-import {InitDbService} from './init-db.service';
+import { Injectable } from '@angular/core';
+import { ClassOption, IDbVocabulary, IVocabulary, UnitOption, Vocabulary } from '../../interfaces/vocabulary';
+import { InitDbService } from './init-db.service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,14 +13,14 @@ export class DbFunctionService extends InitDbService {
         return await this.connection.update({
             in: this.tableName,
             set: dbVoc,
-            where: {id: dbVoc.id}
+            where: { id: dbVoc.id }
         });
     }
 
     async deleteVoc(voc: IVocabulary) {
         return await this.connection.remove({
             from: this.tableName,
-            where: {id: voc.id}
+            where: { id: voc.id }
         });
     }
 
@@ -38,25 +38,25 @@ export class DbFunctionService extends InitDbService {
     async getClasses(): Promise<ClassOption[]> {
         return await this.connection.select({
             from: this.tableName,
-            where: {deleted: 'false'},
+            where: { deleted: 'false' },
             groupBy: this.colClass,
-            order: {by: this.colClass, type: 'asc', idbSorting: false}
+            order: { by: this.colClass, type: 'asc', idbSorting: false }
         });
     }
 
     async getUnits(class_: string): Promise<UnitOption[]> {
         return await this.connection.select({
             from: this.tableName,
-            where: {class: class_, deleted: 'false'},
+            where: { class: class_, deleted: 'false' },
             groupBy: this.colUnit,
-            order: {by: this.colUnit, type: 'asc', idbSorting: false}
+            order: { by: this.colUnit, type: 'asc', idbSorting: false }
         });
     }
 
     async getVocById(id: string): Promise<Vocabulary[]> {
         const vocs = await this.connection.select({
             from: this.tableName,
-            where: {id: id}
+            where: { id: id }
         }) as IDbVocabulary[];
 
         return this.toNormalVocs(vocs);
@@ -65,7 +65,7 @@ export class DbFunctionService extends InitDbService {
     async getAllVocs(): Promise<Vocabulary[]> {
         const vocs = await this.connection.select({
             from: this.tableName,
-            where: {deleted: 'false'}
+            where: { deleted: 'false' }
         }) as IDbVocabulary[];
 
         return this.toNormalVocs(vocs);
@@ -74,18 +74,18 @@ export class DbFunctionService extends InitDbService {
     async getVocsFromOneUnit(class_: string, unit: string): Promise<Vocabulary[]> {
         const vocs = await this.connection.select({
             from: this.tableName,
-            where: {class: class_, unit: unit, deleted: 'false'},
-            order: {by: this.colId, type: 'ASC', idbSorting: false}
+            where: { class: class_, unit: unit, deleted: 'false' },
+            order: { by: this.colId, type: 'ASC', idbSorting: false }
         }) as IDbVocabulary[];
 
         return this.toNormalVocs(vocs);
     }
 
     async getVocsFromOneClass(class_: string): Promise<Vocabulary[]> {
-        const vocs =  await this.connection.select({
+        const vocs = await this.connection.select({
             from: this.tableName,
-            where: {class: class_, deleted: 'false'},
-            order: {by: this.colId, type: 'ASC', idbSorting: false}
+            where: { class: class_, deleted: 'false' },
+            order: { by: this.colId, type: 'ASC', idbSorting: false }
         }) as IDbVocabulary[];
 
         return this.toNormalVocs(vocs);
@@ -94,14 +94,14 @@ export class DbFunctionService extends InitDbService {
     async getAllVocsCount(): Promise<number> {
         return await this.connection.count({
             from: this.tableName,
-            where: {deleted: 'false'}
+            where: { deleted: 'false' }
         });
     }
 
     async getNotSyncedVocs(): Promise<Vocabulary[]> {
         const vocs = await this.connection.select({
             from: this.tableName,
-            where: {synced: 'false'}
+            where: { synced: 'false' }
         }) as IDbVocabulary[];
 
         return this.toNormalVocs(vocs);

@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {IdbService} from './idb.service';
-import {IDataBase, DATA_TYPE, ITable} from 'jsstore';
+import { Injectable } from '@angular/core';
+import { IdbService } from './idb.service';
+import { IDataBase, DATA_TYPE, ITable } from 'jsstore';
 import * as JsStore from 'jsstore';
-import {environment} from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -62,49 +62,49 @@ export class InitDbService {
                     autoIncrement: false
                 },
                 class:
-                    {
-                        dataType: DATA_TYPE.String,
-                        notNull: true
-                    },
+                {
+                    dataType: DATA_TYPE.String,
+                    notNull: true
+                },
                 unit:
-                    {
-                        dataType: DATA_TYPE.String,
-                        notNull: true
-                    },
+                {
+                    dataType: DATA_TYPE.String,
+                    notNull: true
+                },
                 primary_language:
-                    {
-                        notNull: true,
-                        dataType: DATA_TYPE.String
-                    },
+                {
+                    notNull: true,
+                    dataType: DATA_TYPE.String
+                },
                 secondary_language:
-                    {
-                        dataType: DATA_TYPE.String,
-                        notNull: true
-                    },
+                {
+                    dataType: DATA_TYPE.String,
+                    notNull: true
+                },
                 success_count:
-                    {
-                        dataType: DATA_TYPE.Number,
-                        notNull: true,
-                        default: '0'
-                    },
+                {
+                    dataType: DATA_TYPE.Number,
+                    notNull: true,
+                    default: '0'
+                },
                 failures_count:
-                    {
-                        dataType: DATA_TYPE.Number,
-                        notNull: true,
-                        default: '0'
-                    },
+                {
+                    dataType: DATA_TYPE.Number,
+                    notNull: true,
+                    default: '0'
+                },
                 deleted:
-                    {
-                        dataType: DATA_TYPE.String,
-                        notNull: true,
-                        default: 'false'
-                    },
+                {
+                    dataType: DATA_TYPE.String,
+                    notNull: true,
+                    default: 'false'
+                },
                 synced:
-                    {
-                        dataType: DATA_TYPE.String,
-                        notNull: true,
-                        default: 'true'
-                    }
+                {
+                    dataType: DATA_TYPE.String,
+                    notNull: true,
+                    default: 'true'
+                }
             }
         };
         const dataBase: IDataBase = {

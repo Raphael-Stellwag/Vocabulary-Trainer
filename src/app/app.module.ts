@@ -1,17 +1,17 @@
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER  } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
-import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatDividerModule} from "@angular/material/divider";
+import { MatDividerModule } from "@angular/material/divider";
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -63,17 +63,17 @@ import { DialogAddVocabularyComponent } from './dialogs/dialog-add-vocabulary/di
 import { DialogQueryChooseUnitComponent } from './dialogs/dialog-query-choose-unit/dialog-query-choose-unit.component';
 import { DialogQueryCheckInputComponent } from './dialogs/dialog-query-check-input/dialog-query-check-input.component';
 import { DialogQueryFinalResultComponent } from './dialogs/dialog-query-final-result/dialog-query-final-result.component';
-import {DialogChangeRemoveBottomSheetComponent} from './dialogs/dialog-change-remove-bottom-sheet/dialog-change-remove-bottom-sheet.component';
+import { DialogChangeRemoveBottomSheetComponent } from './dialogs/dialog-change-remove-bottom-sheet/dialog-change-remove-bottom-sheet.component';
 import { DialogConfirmationComponent } from './dialogs/dialog-confirmation/dialog-confirmation.component';
 import { DialogEditVocabularyComponent } from './dialogs/dialog-edit-vocabulary/dialog-edit-vocabulary.component'
 import { AuthService } from './services/auth.service';
 import { LoadingSpinnerComponent } from './frames/loading-spinner/loading-spinner.component';
-import { FullscreenOverlayContainer} from '@angular/cdk/overlay';
+import { FullscreenOverlayContainer } from '@angular/cdk/overlay';
 
 import { DialogErrorMessageComponent } from './dialogs/dialog-error-message/dialog-error-message.component';
 import { DialogSuccessMessageComponent } from './dialogs/dialog-success-message/dialog-success-message.component';
 import { ImpressumComponent } from './sites/impressum/impressum.component';
-import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 
 function initializeKeycloak(keycloak: KeycloakService) {
     return () =>

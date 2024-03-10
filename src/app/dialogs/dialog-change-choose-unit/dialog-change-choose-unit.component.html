@@ -2,7 +2,8 @@
 <div mat-dialog-content>
   <p>Which class you want to edit?</p>
   <mat-form-field>
-    <input required matInput [(ngModel)]="data.class" [matAutocomplete]="autoClas" (ngModelChange)="classChanged()" cdkFocusInitial>
+    <input required matInput [(ngModel)]="data.class" [matAutocomplete]="autoClas" (ngModelChange)="classChanged()"
+      cdkFocusInitial>
   </mat-form-field>
   <mat-autocomplete #autoClas="matAutocomplete">
     <mat-option *ngFor="let option of classOptions" [value]="option.class">{{option.class}}</mat-option>
@@ -20,4 +21,3 @@
   <button mat-button (click)="cancelClicked()">Cancel</button>
   <button mat-button (click)="okClicked()" [disabled]="!classChosen || !unitChosen">Ok</button>
 </div>
-

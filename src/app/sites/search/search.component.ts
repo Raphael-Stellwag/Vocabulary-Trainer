@@ -1,11 +1,11 @@
-import {VocabularyService} from '../../services/vocabulary.service';
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Vocabulary} from '../../interfaces/vocabulary';
-import {MatBottomSheet} from '@angular/material/bottom-sheet';
-import {DialogChangeRemoveBottomSheetComponent} from '../../dialogs/dialog-change-remove-bottom-sheet/dialog-change-remove-bottom-sheet.component';
-import {LoadingSpinnerComponent} from 'src/app/frames/loading-spinner/loading-spinner.component';
-import {Overlay} from '@angular/cdk/overlay';
-import {ComponentPortal} from '@angular/cdk/portal';
+import { VocabularyService } from '../../services/vocabulary.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Vocabulary } from '../../interfaces/vocabulary';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { DialogChangeRemoveBottomSheetComponent } from '../../dialogs/dialog-change-remove-bottom-sheet/dialog-change-remove-bottom-sheet.component';
+import { LoadingSpinnerComponent } from 'src/app/frames/loading-spinner/loading-spinner.component';
+import { Overlay } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 
 @Component({
     selector: 'app-site-search',
@@ -23,7 +23,7 @@ export class SiteSearchComponent implements OnInit, OnDestroy {
         let overlayRef;
 
         setTimeout(() => {
-            overlayRef = this.overlay.create({height: '100%', width: '100%'});
+            overlayRef = this.overlay.create({ height: '100%', width: '100%' });
             const userProfilePortal = new ComponentPortal(LoadingSpinnerComponent);
             overlayRef.attach(userProfilePortal);
         });

@@ -6,17 +6,17 @@ import { SiteMenuComponent } from './sites/menu/menu.component';
 import { SiteQueryComponent } from './sites/query/query.component';
 import { SiteChangeComponent } from './sites/change/change.component';
 import { SiteSettingsComponent } from './sites/settings/settings.component';
-import {KeycloakGuard} from './keycloak.guard';
+import { KeycloakGuard } from './keycloak.guard';
 
 const routes: Routes = [
-      { path: '', component: SiteMenuComponent},
-      { path: 'query/:class/:unit', component: SiteQueryComponent},
-      { path: 'query/:class', component: SiteQueryComponent},
-      { path: 'search', component: SiteSearchComponent},
-      { path: 'change/:class/:unit', component: SiteChangeComponent},
-      { path: 'settings/impressum', component: ImpressumComponent },
-      { path: 'settings', component: SiteSettingsComponent },
-      { path: '**', redirectTo: ''}];
+  { path: '', component: SiteMenuComponent },
+  { path: 'query/:class/:unit', component: SiteQueryComponent },
+  { path: 'query/:class', component: SiteQueryComponent },
+  { path: 'search', component: SiteSearchComponent },
+  { path: 'change/:class/:unit', component: SiteChangeComponent },
+  { path: 'settings/impressum', component: ImpressumComponent },
+  { path: 'settings', component: SiteSettingsComponent },
+  { path: '**', redirectTo: '' }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],

@@ -1,10 +1,11 @@
-import {InternetConnectionService} from './internet-connection.service';
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {AuthService} from './auth.service';
-import {IRestVocabulary, Vocabulary} from '../interfaces/vocabulary';
-import {environment} from 'src/environments/environment';
-import {DbFunctionService} from './db/db-function.service';
+import { InternetConnectionService } from './internet-connection.service';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { AuthService } from './auth.service';
+import { IRestVocabulary, Vocabulary } from '../interfaces/vocabulary';
+import { environment } from 'src/environments/environment';
+import { DbFunctionService } from './db/db-function.service';
+import { LogDto } from '../interfaces/log';
 
 
 @Injectable({
@@ -13,7 +14,7 @@ import {DbFunctionService} from './db/db-function.service';
 export class VocabularyRestService {
 
     constructor(private httpClient: HttpClient, private auth: AuthService, private dbFunctions: DbFunctionService,
-                private internetConnection: InternetConnectionService) {
+        private internetConnection: InternetConnectionService) {
     }
 
     async canReachTheBackend() {
@@ -25,8 +26,8 @@ export class VocabularyRestService {
             return null;
         }
 
-        const result = await this.httpClient.post(environment.vocabulary_server.URL,
-            JSON.stringify(voc), {headers: this.getHeaders()}).toPromise() as IRestVocabulary;
+        const result = await this.httpClient.post(environment.vocabulary_server.BASE_URL + '/vocabulary',
+            JSON.stringify(voc), { headers: this.getHeaders() }).toPromise() as IRestVocabulary;
 
         console.log(result);
         if (result !== null) {
@@ -41,8 +42,8 @@ export class VocabularyRestService {
             return null;
         }
 
-        const result = await this.httpClient.put(environment.vocabulary_server.URL + '/' + voc.id,
-            JSON.stringify(voc), {headers: this.getHeaders()}).toPromise() as IRestVocabulary;
+        const result = await this.httpClient.put(environment.vocabulary_server.BASE_URL + '/vocabulary/' + voc.id,
+            JSON.stringify(voc), { headers: this.getHeaders() }).toPromise() as IRestVocabulary;
 
         console.log(result);
         if (result !== null) {
@@ -57,10 +58,44 @@ export class VocabularyRestService {
             return false;
         }
 
-        await this.httpClient.delete(environment.vocabulary_server.URL + '/' + voc.id,
-            {headers: this.getHeaders()}).toPromise();
+        await this.httpClient.delete(environment.vocabulary_server.BASE_URL + '/vocabulary/' + voc.id,
+            { headers: this.getHeaders() }).toPromise();
 
         return true;
+    }
+
+    async getVocUpdatesSinceDate(lastSyncDate: Date) {
+        if (!await this.canReachTheBackend()) {
+            return null;
+        }
+
+        const params = new HttpParams().set('from_last_changed', lastSyncDate.toISOString());
+
+        const object = await this.httpClient.get(environment.vocabulary_server.BASE_URL + '/vocabulary',
+            { headers: this.getHeaders(), params: params }).toPromise() as any;
+
+        return this.dtosToVocabularies(object.list);
+    }
+
+    async getAllVocIds(): Promise<Set<string>> {
+        if (!await this.canReachTheBackend()) {
+            return null;
+        }
+
+        const object = await this.httpClient.get(environment.vocabulary_server.BASE_URL + '/vocabulary/ids',
+            { headers: this.getHeaders() }).toPromise() as any;
+
+        return new Set(object.ids);
+    }
+
+    async postLog(log: LogDto) {
+        if (!await this.canReachTheBackend()) {
+            return null;
+        }
+
+        await this.httpClient.post(environment.vocabulary_server.BASE_URL + "/log",
+            JSON.stringify(log),
+            { headers: this.getHeaders() }).toPromise();
     }
 
     private getHeaders() {
@@ -90,27 +125,4 @@ export class VocabularyRestService {
         return vocs;
     }
 
-    async getVocUpdatesSinceDate(lastSyncDate: Date) {
-        if (!await this.canReachTheBackend()) {
-            return null;
-        }
-
-        const params = new HttpParams().set('from_last_changed', lastSyncDate.toISOString());
-
-        const object = await this.httpClient.get(environment.vocabulary_server.URL,
-            {headers: this.getHeaders(), params: params}).toPromise() as any;
-
-        return this.dtosToVocabularies(object.list);
-    }
-
-    async getAllVocIds(): Promise<Set<string>> {
-        if (!await this.canReachTheBackend()) {
-            return null;
-        }
-
-        const object = await this.httpClient.get(environment.vocabulary_server.URL + '/ids',
-            {headers: this.getHeaders()}).toPromise() as any;
-
-        return new Set(object.ids);
-    }
 }

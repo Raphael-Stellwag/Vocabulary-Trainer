@@ -1,4 +1,4 @@
-import {IAction} from '../interfaces/action';
+import { IAction } from '../interfaces/action';
 
 export namespace LocalStorageNamespace {
     const defaultPrimaryLanguage: string = 'German';

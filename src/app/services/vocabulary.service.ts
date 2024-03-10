@@ -1,10 +1,10 @@
-import {VocabularyRestService} from 'src/app/services/vocabulary-rest.service';
-import {FilteredDataObject} from '../interfaces/FilteredDataObject';
-import {VocabularyDbService} from './vocabulary-db.service';
-import {IVocabulary, Vocabulary} from '../interfaces/vocabulary';
-import {Injectable} from '@angular/core';
+import { VocabularyRestService } from 'src/app/services/vocabulary-rest.service';
+import { FilteredDataObject } from '../interfaces/FilteredDataObject';
+import { VocabularyDbService } from './vocabulary-db.service';
+import { IVocabulary, Vocabulary } from '../interfaces/vocabulary';
+import { Injectable } from '@angular/core';
 import * as uuid from 'uuid';
-import {LocalStorageNamespace} from './local-storage.namespace';
+import { LocalStorageNamespace } from './local-storage.namespace';
 
 @Injectable({
     providedIn: 'root'

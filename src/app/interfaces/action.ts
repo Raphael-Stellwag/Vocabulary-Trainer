@@ -14,14 +14,14 @@ export class Action implements IAction {
     vocabularyBeforeAction: IVocabulary;
     vocabularyAfterAction: IVocabulary;
 
-    constructor(id: number, method: ActionMethod, vocabularyBeforeAction:IVocabulary, vocabularyAfterAction:IVocabulary) {
+    constructor(id: number, method: ActionMethod, vocabularyBeforeAction: IVocabulary, vocabularyAfterAction: IVocabulary) {
         this.id = id;
         this.method = method;
         this.vocabularyBeforeAction = vocabularyBeforeAction;
         this.vocabularyAfterAction = vocabularyAfterAction;
     }
 
-    static findReverseMethod(params:ActionMethod): ActionMethod {
+    static findReverseMethod(params: ActionMethod): ActionMethod {
         switch (params) {
             case ActionMethod.ADD:
                 return ActionMethod.DELETE;

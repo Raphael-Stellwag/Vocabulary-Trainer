@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {IVocabulary} from '../../interfaces/vocabulary';
-import {MatDialog} from '@angular/material/dialog';
-import {DialogQueryCheckInputComponent} from 'src/app/dialogs/dialog-query-check-input/dialog-query-check-input.component';
-import {DialogQueryFinalResultComponent} from 'src/app/dialogs/dialog-query-final-result/dialog-query-final-result.component';
-import {VocabularyService} from 'src/app/services/vocabulary.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { IVocabulary } from '../../interfaces/vocabulary';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogQueryCheckInputComponent } from 'src/app/dialogs/dialog-query-check-input/dialog-query-check-input.component';
+import { DialogQueryFinalResultComponent } from 'src/app/dialogs/dialog-query-final-result/dialog-query-final-result.component';
+import { VocabularyService } from 'src/app/services/vocabulary.service';
 
 @Component({
     selector: 'app-site-query',
@@ -53,7 +53,7 @@ export class SiteQueryComponent {
 
         const dialogRef = this.dialog.open(DialogQueryCheckInputComponent, {
             width: '250px',
-            data: {voc: this.vocsToQuery[this.index], userInput: secondaryLanguageInput}
+            data: { voc: this.vocsToQuery[this.index], userInput: secondaryLanguageInput }
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -75,7 +75,7 @@ export class SiteQueryComponent {
     private shwoFinalDialog() {
         const dialogRef = this.dialog.open(DialogQueryFinalResultComponent, {
             width: '250px',
-            data: {count: this.index + 1, correct: this.correct, failures: this.failures}
+            data: { count: this.index + 1, correct: this.correct, failures: this.failures }
         });
 
         dialogRef.afterClosed().subscribe(result => {

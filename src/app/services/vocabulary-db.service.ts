@@ -1,10 +1,10 @@
-import {Action} from '../interfaces/action';
-import {Injectable} from '@angular/core';
-import {ClassOption, IVocabulary, UnitOption, Vocabulary} from '../interfaces/vocabulary';
-import {ActionMethod} from '../interfaces/action';
-import {DbFunctionService} from './db/db-function.service';
-import {LocalStorageNamespace} from './local-storage.namespace';
-import {VocabularyService} from './vocabulary.service';
+import { Action } from '../interfaces/action';
+import { Injectable } from '@angular/core';
+import { ClassOption, IVocabulary, UnitOption, Vocabulary } from '../interfaces/vocabulary';
+import { ActionMethod } from '../interfaces/action';
+import { DbFunctionService } from './db/db-function.service';
+import { LocalStorageNamespace } from './local-storage.namespace';
+import { VocabularyService } from './vocabulary.service';
 
 
 @Injectable({

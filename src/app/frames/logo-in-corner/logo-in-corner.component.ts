@@ -13,6 +13,6 @@ export class LogoInCornerComponent implements OnInit {
 
   }
 
- 
+
 
 }

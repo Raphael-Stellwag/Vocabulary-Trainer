@@ -33,6 +33,6 @@ export class InterceptorService implements HttpInterceptor {
       }
     }
     return undefined; //TODO: fix
-    
+
   }
 }

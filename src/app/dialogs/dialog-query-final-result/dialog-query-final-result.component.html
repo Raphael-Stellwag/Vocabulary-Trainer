@@ -2,24 +2,23 @@
 <div mat-dialog-content>
   <table style="overflow-x: auto">
     <tr>
-        <td>Trained Vocabulary:</td>
-        <td>{{data.count}}</td>
+      <td>Trained Vocabulary:</td>
+      <td>{{data.count}}</td>
     </tr>
     <br>
     <tr>
-        <td>Correct Answers:</td>
-        <td>{{data.correct}} </td>
+      <td>Correct Answers:</td>
+      <td>{{data.correct}} </td>
     </tr>
     <br>
     <tr>
-        <td>Wrong Answers:</td>
-        <td>{{data.failures}} </td>
+      <td>Wrong Answers:</td>
+      <td>{{data.failures}} </td>
     </tr>
   </table>
   <br>
   <p>{{resultMessage}}</p>
 </div>
 <div mat-dialog-actions>
-    <button mat-button style="margin-left: 0px;" (click)="okClicked()">End this training</button>
+  <button mat-button style="margin-left: 0px;" (click)="okClicked()">End this training</button>
 </div>
-

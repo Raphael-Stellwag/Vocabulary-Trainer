@@ -1,8 +1,8 @@
 import { VocabularyService } from '../../services/vocabulary.service';
 import { Component, Inject } from '@angular/core';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
-import { MatSnackBar} from '@angular/material/snack-bar';
-import {MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 
 import { DialogConfirmationComponent } from '../dialog-confirmation/dialog-confirmation.component';
 import { DialogEditVocabularyComponent } from '../dialog-edit-vocabulary/dialog-edit-vocabulary.component';
@@ -26,9 +26,9 @@ export class DialogChangeRemoveBottomSheetComponent {
     dialogRef.afterClosed().toPromise().then(result => {
       if (result) {
         this.vocService.deleteVocabulary(this.voc).then(() => {
-          this.snackBar.open('Vocabulary successfully deleted' , null, {duration: 2000});
+          this.snackBar.open('Vocabulary successfully deleted', null, { duration: 2000 });
           this.bottomSheetRef.dismiss(true);
-        }).catch(err => this.snackBar.open(JSON.parse(err) , null, {duration: 2000}));
+        }).catch(err => this.snackBar.open(JSON.parse(err), null, { duration: 2000 }));
       }
       dialogRef = null;
     }).catch(() => {

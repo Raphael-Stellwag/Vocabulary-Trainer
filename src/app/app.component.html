@@ -3,33 +3,44 @@
   <div *ngIf="isMainMenu">
     <div class="divCorner" style="position:absolute; left:0;">
       <svg id="svgLO" viewBox="0 0 357 343" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M-56 -45.0001L165.5 -69.5C110.598 -68.4237 212 -69.5 356.5 1.32057C282.878 50.4181 227.042 122.209 244 207C276 367 -72 341 -72 341L-56 -45.0001Z" fill="#C4C4C4"></path>
+        <path
+          d="M-56 -45.0001L165.5 -69.5C110.598 -68.4237 212 -69.5 356.5 1.32057C282.878 50.4181 227.042 122.209 244 207C276 367 -72 341 -72 341L-56 -45.0001Z"
+          fill="#C4C4C4"></path>
       </svg>
     </div>
-      
+
     <div class="divCorner" style="position:absolute; right:0;">
-      <svg id="svgRO" style="position:absolute; right:0;" xmlns="http://www.w3.org/2000/svg"  viewBox="250 50 400 350" fill="none">
-        <path d="M51.2686 -163.814L328.454 -441L930.454 161C930.454 161 793.926 697.529 653.269 438.186C512.611 178.843 255.485 321.843 308.612 93.5287C354.612 -104.157 51.2686 -163.814 51.2686 -163.814Z" fill="#C4C4C4"></path>
+      <svg id="svgRO" style="position:absolute; right:0;" xmlns="http://www.w3.org/2000/svg" viewBox="250 50 400 350"
+        fill="none">
+        <path
+          d="M51.2686 -163.814L328.454 -441L930.454 161C930.454 161 793.926 697.529 653.269 438.186C512.611 178.843 255.485 321.843 308.612 93.5287C354.612 -104.157 51.2686 -163.814 51.2686 -163.814Z"
+          fill="#C4C4C4"></path>
       </svg>
     </div>
-        
+
     <div class="divCorner" style="position: absolute; bottom: 0;">
-      <svg id="svgLU" style="position: absolute; bottom: 0;" viewBox="0 0 377 430" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M-126 85C-126 85 -62 -47 49 19C160 85 220 -12.9893 288 85C356 182.989 448 262.989 288 296C128 329.011 288 507 288 507H-126V85Z" fill="#C4C4C4"></path>
+      <svg id="svgLU" style="position: absolute; bottom: 0;" viewBox="0 0 377 430" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M-126 85C-126 85 -62 -47 49 19C160 85 220 -12.9893 288 85C356 182.989 448 262.989 288 296C128 329.011 288 507 288 507H-126V85Z"
+          fill="#C4C4C4"></path>
       </svg>
     </div>
-      
+
     <div class="divCorner" style="position: absolute; bottom: 0; right: 0;">
-      <svg id="svgRU" style="right: 0; position: absolute; bottom: 0;" viewBox="0 0 552 459" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M188 268C194.484 114 340 -72 472 30C604 132 618 53.0001 618 53.0001V671H98L0 498C0 498 181.516 422 188 268Z" fill="#C4C4C4"></path>
+      <svg id="svgRU" style="right: 0; position: absolute; bottom: 0;" viewBox="0 0 552 459" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M188 268C194.484 114 340 -72 472 30C604 132 618 53.0001 618 53.0001V671H98L0 498C0 498 181.516 422 188 268Z"
+          fill="#C4C4C4"></path>
       </svg>
     </div>
   </div>
-    
+
   <app-logo-in-corner></app-logo-in-corner>
 
 </div>
- 
+
 <div class="OuterBox" [ngClass]="{'blueBackground':!isMainMenu}">
   <div [ngClass]="{'MobileCenterBox':isMobileUser,'CenterBox':!isMobileUser}">
     <div *ngIf="isMobileUser" style="height: 10%">
@@ -40,5 +51,5 @@
 </div>
 
 <script>
-   window.addEventListener('resize', resizeElements());
+  window.addEventListener('resize', resizeElements());
 </script>

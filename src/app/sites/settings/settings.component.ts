@@ -1,19 +1,19 @@
-import {VocabularyService} from 'src/app/services/vocabulary.service';
-import {environment} from './../../../environments/environment';
-import {VarSecondaryLanguageComponent} from './../../frames/var-secondary-language/var-secondary-language.component';
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {VarPrimaryLanguageComponent} from '../../frames/var-primary-language/var-primary-language.component';
-import {LocalStorageNamespace} from '../../services/local-storage.namespace';
-import {Vocabulary} from 'src/app/interfaces/vocabulary';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {MatDialog} from '@angular/material/dialog';
-import {AuthService} from 'src/app/services/auth.service';
-import {DialogQueryChooseUnitComponent} from 'src/app/dialogs/dialog-query-choose-unit/dialog-query-choose-unit.component';
-import {LoadingSpinnerComponent} from 'src/app/frames/loading-spinner/loading-spinner.component';
-import {Overlay} from '@angular/cdk/overlay';
-import {ComponentPortal} from '@angular/cdk/portal';
-import {VocabularyRestService} from 'src/app/services/vocabulary-rest.service';
-import {DialogConfirmationComponent} from '../../dialogs/dialog-confirmation/dialog-confirmation.component';
+import { VocabularyService } from 'src/app/services/vocabulary.service';
+import { environment } from './../../../environments/environment';
+import { VarSecondaryLanguageComponent } from './../../frames/var-secondary-language/var-secondary-language.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { VarPrimaryLanguageComponent } from '../../frames/var-primary-language/var-primary-language.component';
+import { LocalStorageNamespace } from '../../services/local-storage.namespace';
+import { Vocabulary } from 'src/app/interfaces/vocabulary';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { AuthService } from 'src/app/services/auth.service';
+import { DialogQueryChooseUnitComponent } from 'src/app/dialogs/dialog-query-choose-unit/dialog-query-choose-unit.component';
+import { LoadingSpinnerComponent } from 'src/app/frames/loading-spinner/loading-spinner.component';
+import { Overlay } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { VocabularyRestService } from 'src/app/services/vocabulary-rest.service';
+import { DialogConfirmationComponent } from '../../dialogs/dialog-confirmation/dialog-confirmation.component';
 
 
 @Component({
@@ -28,7 +28,7 @@ export class SiteSettingsComponent implements OnInit {
     version: string = null;
 
     constructor(public snackBar: MatSnackBar, public auth: AuthService, private dialog: MatDialog,
-                private vocService: VocabularyService, private overlay: Overlay, private rest: VocabularyRestService) {
+        private vocService: VocabularyService, private overlay: Overlay, private rest: VocabularyRestService) {
     }
 
     ngOnInit() {
@@ -49,7 +49,7 @@ export class SiteSettingsComponent implements OnInit {
         const newSecondaryLanguage: string = this.varSecondaryLanguageComponent.getSecondaryLanguage();
         LocalStorageNamespace.setPrimaryLanguage(newPrimaryLanguage);
         LocalStorageNamespace.setSecondaryLanguage(newSecondaryLanguage);
-        this.snackBar.open('Languages successfully saved', null, {duration: 2000});
+        this.snackBar.open('Languages successfully saved', null, { duration: 2000 });
     }
 
     chooseFileToImport() {
@@ -61,7 +61,7 @@ export class SiteSettingsComponent implements OnInit {
     }
 
     importFile(event) {
-        const overlayRef = this.overlay.create({height: '100%', width: '100%'});
+        const overlayRef = this.overlay.create({ height: '100%', width: '100%' });
         const userProfilePortal = new ComponentPortal(LoadingSpinnerComponent);
         overlayRef.attach(userProfilePortal);
 
@@ -94,7 +94,7 @@ export class SiteSettingsComponent implements OnInit {
                 _this.vocService.addBulkVocabulary(addVocs).then(result => {
                     overlayRef.dispose();
                     const message = addVocs.length + ' Vocabularies successfully saved';
-                    _this.snackBar.open(message, null, {duration: 2000});
+                    _this.snackBar.open(message, null, { duration: 2000 });
                 });
 
             };
@@ -105,7 +105,7 @@ export class SiteSettingsComponent implements OnInit {
     chooseVocabularyToExport() {
         const dialogRef = this.dialog.open(DialogQueryChooseUnitComponent, {
             width: '250px',
-            data: {reason: 'export'}
+            data: { reason: 'export' }
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -154,8 +154,8 @@ export class SiteSettingsComponent implements OnInit {
         dialogRef.afterClosed().toPromise().then(result => {
             if (result) {
                 this.vocService.deleteAllVocabularies().then((number) => {
-                    this.snackBar.open(number + ' Vocabularies successfully deleted' , null, {duration: 2000});
-                }).catch(err => this.snackBar.open(JSON.parse(err) , null, {duration: 2000}));
+                    this.snackBar.open(number + ' Vocabularies successfully deleted', null, { duration: 2000 });
+                }).catch(err => this.snackBar.open(JSON.parse(err), null, { duration: 2000 }));
             }
             dialogRef = null;
         });

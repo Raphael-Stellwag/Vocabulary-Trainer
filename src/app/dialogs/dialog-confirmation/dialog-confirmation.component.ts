@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog-confirmation',
@@ -8,7 +8,7 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 })
 export class DialogConfirmationComponent {
 
-  constructor(public dialogRef: MatDialogRef<DialogConfirmationComponent>) {}
+  constructor(public dialogRef: MatDialogRef<DialogConfirmationComponent>) { }
 
   public confirmMessage: string;
   public confirmTitle = 'Confirm';

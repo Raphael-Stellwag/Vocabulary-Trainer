@@ -8,7 +8,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class DialogSuccessMessageComponent {
 
-  constructor(public dialogRef: MatDialogRef<DialogSuccessMessageComponent>) {}
+  constructor(public dialogRef: MatDialogRef<DialogSuccessMessageComponent>) { }
 
   public successMessage: string;
   public successTitle: string;

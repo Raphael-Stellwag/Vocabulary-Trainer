@@ -1,6 +1,6 @@
 import { NavigationEnd } from '@angular/router';
 import { AfterViewInit, Component, Input, OnInit, ViewChildren } from '@angular/core';
-import { LocalStorageNamespace} from '../../services/local-storage.namespace';
+import { LocalStorageNamespace } from '../../services/local-storage.namespace';
 
 
 @Component({
@@ -17,7 +17,7 @@ export class VarSecondaryLanguageComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.secondaryLanguage = LocalStorageNamespace.getSecondaryLanguage();
-    document.addEventListener(LocalStorageNamespace.localStorageSecondaryLanguageKey, function(e) {
+    document.addEventListener(LocalStorageNamespace.localStorageSecondaryLanguageKey, function (e) {
       this.secondaryLanguage = LocalStorageNamespace.getSecondaryLanguage();
     });
   }

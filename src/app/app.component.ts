@@ -1,11 +1,12 @@
-import {Component} from '@angular/core';
-import {SwUpdate} from '@angular/service-worker';
-import {VocabularyRestService} from './services/vocabulary-rest.service';
-import {Router, RoutesRecognized, NavigationEnd} from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {AuthService} from './services/auth.service';
-import {environment} from 'src/environments/environment';
-import {VocabularyService} from './services/vocabulary.service';
+import { Component } from '@angular/core';
+import { SwUpdate } from '@angular/service-worker';
+import { VocabularyRestService } from './services/vocabulary-rest.service';
+import { Router, RoutesRecognized, NavigationEnd } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from './services/auth.service';
+import { environment } from 'src/environments/environment';
+import { VocabularyService } from './services/vocabulary.service';
+import { LoggingService } from './services/logging.service';
 
 @Component({
     selector: 'app-root',
@@ -16,21 +17,22 @@ export class AppComponent {
     isMainMenu;
     isMobileUser;
 
-    constructor(update: SwUpdate, vocabularyService: VocabularyService, private router: Router, public snackBar: MatSnackBar, private authService: AuthService) {
+    constructor(update: SwUpdate, vocabularyService: VocabularyService, private router: Router,
+        public snackBar: MatSnackBar, authService: AuthService, log: LoggingService) {
         document.ontouchstart = function (e) {
             e.preventDefault();
         };
 
         authService.isLoggedIn().then(loggedIn => {
             if (loggedIn) {
-                console.log("User logged in");
+                log.info("User logged in");
                 vocabularyService.sync();
             } else {
-                console.log("User not logged in");
+                log.info("User not logged in");
             }
         })
 
-        console.info('App version: ' + environment.version);
+        log.info('App version: ' + environment.version);
 
         if (screen.height > 600 && screen.width > 600) {
             this.isMobileUser = false;
@@ -54,7 +56,7 @@ export class AppComponent {
             });
 
         update.available.subscribe(event => {
-            const snack = this.snackBar.open('Update Available', 'Reload', {duration: 5000});
+            const snack = this.snackBar.open('Update Available', 'Reload', { duration: 5000 });
             snack.onAction()
                 .subscribe(() => {
                     window.location.reload();

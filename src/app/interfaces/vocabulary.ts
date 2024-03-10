@@ -64,7 +64,7 @@ export class Vocabulary implements IVocabulary {
     synced = true;
 
     constructor(new_id?, new_success_count?, new_failures_count?, new_class?, new_unit?, new_primary_language?, new_secondary_language?,
-                new_last_changed?, new_deleted?, new_synced?) {
+        new_last_changed?, new_deleted?, new_synced?) {
 
         this.id = new_id;
         this.success_count = new_success_count;

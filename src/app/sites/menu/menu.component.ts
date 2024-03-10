@@ -34,7 +34,7 @@ export class SiteMenuComponent {
     let count = await this.vocService.getVocabularyCount();
 
     if (count == 0) {
-      this.snackBar.open("You first have to add Vocabularies (under Change)" , null, {duration:5000});
+      this.snackBar.open("You first have to add Vocabularies (under Change)", null, { duration: 5000 });
     } else {
       const dialogRef = this.dialog.open(DialogQueryChooseUnitComponent, {
         width: '250px',
