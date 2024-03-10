@@ -95,7 +95,6 @@ export class Vocabulary implements IVocabulary {
         const newVocs: Vocabulary[] = [];
         for (const element of vocs) {
             const newVoc = this.createNewObject(element);
-            console.log(newVoc);
             newVocs.push(newVoc);
         }
         return newVocs;

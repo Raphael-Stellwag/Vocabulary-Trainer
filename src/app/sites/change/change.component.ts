@@ -8,6 +8,7 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { DialogAddVocabularyComponent } from '../../dialogs/dialog-add-vocabulary/dialog-add-vocabulary.component';
 import { DialogChangeRemoveBottomSheetComponent } from '../../dialogs/dialog-change-remove-bottom-sheet/dialog-change-remove-bottom-sheet.component';
 import { VocabularyService } from 'src/app/services/vocabulary.service';
+import { LoggingService } from 'src/app/services/logging.service';
 
 @Component({
     selector: 'app-site-change',
@@ -20,7 +21,7 @@ export class SiteChangeComponent implements OnInit, OnDestroy {
     vocs: FilteredDataObject = new FilteredDataObject();
 
     constructor(public vocService: VocabularyService, public router: Router, public route: ActivatedRoute, public dialog: MatDialog,
-        public snackBar: MatSnackBar, private bottomSheet: MatBottomSheet) {
+        public snackBar: MatSnackBar, private bottomSheet: MatBottomSheet, private log: LoggingService) {
         this.route.params.forEach((params: Params) => {
             if (params['unit'] !== undefined) {
                 this.unit = params['unit'];
@@ -37,7 +38,7 @@ export class SiteChangeComponent implements OnInit, OnDestroy {
 
     async ngOnInit() {
         this.vocs = await this.vocService.getVocsFromOneUnitWithUpdate(this.class, this.unit);
-        console.log(this.vocs);
+        this.log.info(this.vocs);
     }
 
     ngOnDestroy(): void {

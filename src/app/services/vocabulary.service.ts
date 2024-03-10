@@ -5,6 +5,7 @@ import { IVocabulary, Vocabulary } from '../interfaces/vocabulary';
 import { Injectable } from '@angular/core';
 import * as uuid from 'uuid';
 import { LocalStorageNamespace } from './local-storage.namespace';
+import { LoggingService } from './logging.service';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,7 @@ import { LocalStorageNamespace } from './local-storage.namespace';
 export class VocabularyService {
     private currentUsedFilteredDataObject: FilteredDataObject[] = [];
 
-    constructor(private dbService: VocabularyDbService, private restService: VocabularyRestService) {
+    constructor(private dbService: VocabularyDbService, private restService: VocabularyRestService, private log: LoggingService) {
     }
 
     async addVocabulary(voc: Vocabulary): Promise<any> {
@@ -141,7 +142,7 @@ export class VocabularyService {
     async getVocsFromOneUnitWithUpdate(class_: string, unit: string): Promise<FilteredDataObject> {
         const result = await this.dbService.getVocsFromOneUnit(class_, unit);
         const filteredDataObject = new FilteredDataObject();
-        console.log(filteredDataObject);
+        this.log.info(filteredDataObject);
         filteredDataObject.class = class_;
         filteredDataObject.unit = unit;
         filteredDataObject.data = Vocabulary.createCorrectReferences(result);
@@ -234,7 +235,7 @@ export class VocabularyService {
                 try {
                     promises.push(this.restService.deleteVocabulary(voc));
                 } catch (e) {
-                    console.error(e);
+                    this.log.error(e);
                 }
             }
             promises.push(this.dbService.deleteVocabulary(voc));

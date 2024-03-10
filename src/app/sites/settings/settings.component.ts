@@ -14,6 +14,7 @@ import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { VocabularyRestService } from 'src/app/services/vocabulary-rest.service';
 import { DialogConfirmationComponent } from '../../dialogs/dialog-confirmation/dialog-confirmation.component';
+import { LoggingService } from 'src/app/services/logging.service';
 
 
 @Component({
@@ -28,11 +29,11 @@ export class SiteSettingsComponent implements OnInit {
     version: string = null;
 
     constructor(public snackBar: MatSnackBar, public auth: AuthService, private dialog: MatDialog,
-        private vocService: VocabularyService, private overlay: Overlay, private rest: VocabularyRestService) {
+        private vocService: VocabularyService, private overlay: Overlay, private rest: VocabularyRestService, private log: LoggingService) {
     }
 
     ngOnInit() {
-        console.log('Init called');
+        this.log.info('Init called');
 
         this.version = environment.version;
 

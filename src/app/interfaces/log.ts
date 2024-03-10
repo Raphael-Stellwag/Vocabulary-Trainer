@@ -11,6 +11,6 @@ export class LogDto {
     name: string;
     version: string;
     message: string;
-    level: LogLevel;
+    level: string;
     //additional_properties: object;
 }

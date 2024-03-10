@@ -1,7 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { ChosenUnit } from '../../interfaces/chosen-unit';
 import { VocabularyDbService } from 'src/app/services/vocabulary-db.service';
+import { LoggingService } from 'src/app/services/logging.service';
 
 @Component({
     selector: 'app-dialog-change-choose-unit',
@@ -19,10 +20,10 @@ export class DialogChangeChooseUnitComponent {
     };
     test = '';
 
-    constructor(public dialogRef: MatDialogRef<DialogChangeChooseUnitComponent>, private vocService: VocabularyDbService) {
+    constructor(public dialogRef: MatDialogRef<DialogChangeChooseUnitComponent>, private vocService: VocabularyDbService, private log: LoggingService) {
         vocService.getClasses().then((classes) => {
             this.classOptions = classes;
-        }).catch(err => console.log('ERR', err));
+        }).catch(err => this.log.error('ERR', err));
     }
 
     cancelClicked(): void {
@@ -36,7 +37,7 @@ export class DialogChangeChooseUnitComponent {
     classChanged(): void {
         this.vocService.getUnits(this.data.class).then((units) => {
             this.unitOptions = units;
-        }).catch(err => console.log('ERR', err));
+        }).catch(err => this.log.error('ERR', err));
         if (this.data.class !== '') {
             this.classChosen = true;
         } else {

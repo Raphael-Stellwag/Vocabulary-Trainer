@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChildren } from '@angular/core';
 import { LocalStorageNamespace } from '../../services/local-storage.namespace';
+import { LoggingService } from 'src/app/services/logging.service';
 
 @Component({
     selector: 'app-var-primary-language',
@@ -11,7 +12,7 @@ export class VarPrimaryLanguageComponent implements OnInit, AfterViewInit {
     @Input() editable = false;
     @ViewChildren('primaryLanguage') editableDiv;
 
-    constructor() { }
+    constructor(private log: LoggingService) { }
 
     ngOnInit(): void {
         this.primaryLanguage = LocalStorageNamespace.getPrimaryLanguage();
@@ -32,9 +33,9 @@ export class VarPrimaryLanguageComponent implements OnInit, AfterViewInit {
    */
     public getPrimaryLanguage() {
         if (this.editable) {
-            console.log(this.editableDiv.first.nativeElement.innerText);
-            console.log(this.editableDiv.first.nativeElement);
-            console.log(this.editableDiv.first.nativeElement.innerHTML);
+            this.log.info(this.editableDiv.first.nativeElement.innerText);
+            this.log.info(this.editableDiv.first.nativeElement);
+            this.log.info(this.editableDiv.first.nativeElement.innerHTML);
             return this.editableDiv.first.nativeElement.innerText;
         } else {
             return this.primaryLanguage;

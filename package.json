@@ -1,12 +1,15 @@
 {
   "name": "ng-voc",
   "version": "0.3.5",
+  "description": "1. npm run build:deploy:1 2. IMAGE=123 npm run build:deploy:1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "build:prod": "ng build --configuration production",
     "build:docker": "docker build -t vocabulary-frontend .",
+    "build:deploy:1": "docker build -t vocabulary-frontend . && docker image ls | grep vocabulary-frontend",
+    "build:deploy:2": "docker tag $IMAGE 0.0.0.0:1000/vocabulary-frontend:main && docker push 0.0.0.0:1000/vocabulary-frontend:main",
     "sw-build": "ng build --configuration production --base-href https://vokabel-trainer-9e341.web.app/#/",
     "sw-serve": "npm run sw-build && http-server dist -p 8080 -o",
     "test": "ng test",

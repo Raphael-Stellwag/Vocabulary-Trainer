@@ -1,10 +1,7 @@
-import { Action } from '../interfaces/action';
 import { Injectable } from '@angular/core';
-import { ClassOption, IVocabulary, UnitOption, Vocabulary } from '../interfaces/vocabulary';
-import { ActionMethod } from '../interfaces/action';
+import { IVocabulary, Vocabulary } from '../interfaces/vocabulary';
 import { DbFunctionService } from './db/db-function.service';
-import { LocalStorageNamespace } from './local-storage.namespace';
-import { VocabularyService } from './vocabulary.service';
+import { LoggingService } from './logging.service';
 
 
 @Injectable({
@@ -12,7 +9,7 @@ import { VocabularyService } from './vocabulary.service';
 })
 export class VocabularyDbService {
 
-    constructor(private dbFunctions: DbFunctionService) {
+    constructor(private dbFunctions: DbFunctionService, private log: LoggingService) {
     }
 
     /*
@@ -23,7 +20,7 @@ export class VocabularyDbService {
             const voc = vocs[i];
             voc.id = LocalStorageNamespace.getNextPrimaryId();
             const result = await this.dbFunctions.addVoc(voc).catch(err => {
-                console.error('Error at the dbFunctions.insertVocabularyJustDb during bulk insert', err);
+                this.log.error('Error at the dbFunctions.insertVocabularyJustDb during bulk insert', err);
                 throw new Error(err);
             });
             dbResults.push(result[0] as IVocabulary);
@@ -35,14 +32,14 @@ export class VocabularyDbService {
 
     async addVocabulary(voc: IVocabulary) {
         return await this.dbFunctions.addVoc(voc).catch(err => {
-            console.error(err);
+            this.log.error(err);
             throw new Error(err);
         });
     }
 
     async editVocabulary(voc: Vocabulary) {
         return await this.dbFunctions.updateVoc(voc).catch(err => {
-            console.error(err);
+            this.log.error(err);
             throw new Error(err);
         });
     }

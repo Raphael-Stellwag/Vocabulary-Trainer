@@ -3,6 +3,7 @@ import { IdbService } from './idb.service';
 import { IDataBase, DATA_TYPE, ITable } from 'jsstore';
 import * as JsStore from 'jsstore';
 import { environment } from 'src/environments/environment';
+import { LoggingService } from '../logging.service';
 
 @Injectable({
     providedIn: 'root'
@@ -19,7 +20,7 @@ export class InitDbService {
     protected colSuccessCount = 'success_count';
     protected colFailuresCount = 'failures_count';
 
-    constructor() {
+    constructor(private log: LoggingService) {
         // initiate database when a service instance is initiated
         this.initDatabase();
     }
@@ -32,7 +33,7 @@ export class InitDbService {
     private initDatabase() {
 
         const dbNewlyCreated = this.connection.initDb(this.getDatabase());
-        console.info(dbNewlyCreated);
+        this.log.info(dbNewlyCreated);
 
         // initiate jsstore connection
         // var connection = new JsStore.Connection();

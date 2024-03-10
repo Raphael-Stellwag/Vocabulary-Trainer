@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ClassOption, IVocabulary, UnitOption } from '../interfaces/vocabulary';
 import { InitDbService } from './init-db.service';
+import { LoggingService } from './logging.service';
 
 @Injectable({
     providedIn: 'root'
@@ -8,8 +9,8 @@ import { InitDbService } from './init-db.service';
 export class DbFunctionService extends InitDbService {
     static db;
 
-    constructor() {
-        super();
+    constructor(log: LoggingService) {
+        super(log);
     }
 
     public updateVocabularyJustDb(voc: IVocabulary) {
