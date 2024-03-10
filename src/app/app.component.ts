@@ -16,12 +16,19 @@ export class AppComponent {
     isMainMenu;
     isMobileUser;
 
-    constructor(update: SwUpdate, vocabularyService: VocabularyService, private router: Router, public snackBar: MatSnackBar) {
+    constructor(update: SwUpdate, vocabularyService: VocabularyService, private router: Router, public snackBar: MatSnackBar, private authService: AuthService) {
         document.ontouchstart = function (e) {
             e.preventDefault();
         };
 
-        vocabularyService.sync();
+        authService.isLoggedIn().then(loggedIn => {
+            if (loggedIn) {
+                console.log("User logged in");
+                vocabularyService.sync();
+            } else {
+                console.log("User not logged in");
+            }
+        })
 
         console.info('App version: ' + environment.version);
 

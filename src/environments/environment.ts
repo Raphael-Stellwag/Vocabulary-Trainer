@@ -7,11 +7,11 @@ export const environment = {
   version: pkg.version + '-DEV',
   production: false,
   auth: {
-    URL: 'http://localhost:8180/auth',
+    URL: 'http://localhost:8180',
     REALM: 'Voc-Realm',
     CLIENT_ID: 'voc-angular-application',
   },
   vocabulary_server: {
     URL: 'http://localhost:8080/api/v1/vocabulary',
-  }
+  },
 };

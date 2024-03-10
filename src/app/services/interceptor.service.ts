@@ -23,11 +23,7 @@ export class InterceptorService implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
 
-    //TODO: Check
-    
-    /*if (req.url == environment.auth.LOGIN || req.url == environment.auth.REGISTER) {
-      return next.handle(req);
-    } else*/ if (this.auth.isLoggedIn) {
+    if (this.auth.isLoggedIn) {
       let token = this.auth.getAuthToken();
       if (token != null) {
         const tokenReq = req.clone({

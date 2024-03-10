@@ -140,6 +140,7 @@ export class SiteSettingsComponent implements OnInit {
     async login() {
         const loggedIn = await this.auth.login();
         if (loggedIn) {
+            this.sync();
             this.userId = this.auth.getUsername();
         }
     }

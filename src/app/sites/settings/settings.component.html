@@ -6,7 +6,6 @@
 
 <div style='clear: both;'>
 </div>
-
 <br>
 
 <div>
@@ -15,16 +14,16 @@
     <div class="buttonOutlineText"><app-var-primary-language #VarPrimaryLanguage [editable]="true"></app-var-primary-language></div>
   </div>
 </div>
-
 <br>
+
 <div>
   <span class="buttonHeader">Secondary Language</span>
   <div class="buttonOutline">
     <div class="buttonOutlineText"><app-var-secondary-language #VarSecondaryLanguage [editable]="true"></app-var-secondary-language></div>
   </div>
 </div>
-
 <br>
+
 <div class="button" (click)="saveButtonPressed()" (keypress)="saveButtonPressed()" tabindex="0">
   <span class="buttonText">
     Save
@@ -58,7 +57,6 @@
     </span>
   </div>
 </div>
-
 <div *ngIf="userId != null" >
   <span class="buttonHeader">Logged in as {{userId}}</span>
   <div class="button" (click)="sync()">
@@ -66,7 +64,6 @@
       Sync Vocabularies
     </span>
   </div>
-
 </div>
 <br>
 
@@ -76,7 +73,6 @@
       Delete All Vocabularies
     </span>
   </div>
-
 </div>
 <br>
 
@@ -87,8 +83,8 @@
     </span>
   </div>
 </a>
-
 <br>
+
 <div>
   <span class="buttonHeader">Version {{version}}</span>
 </div>

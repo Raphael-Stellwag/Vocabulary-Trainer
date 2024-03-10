@@ -62,6 +62,9 @@ export class VocabularyService {
 
     }
 
+    /**
+     * Must be logged in
+     */
     async sync() {
 
         const date_before_update = new Date();
