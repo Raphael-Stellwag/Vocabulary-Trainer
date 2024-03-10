@@ -44,6 +44,9 @@ export class LoginToSyncComponent implements OnInit {
       this.showErrorDialog("No internet connection");
       return;
     }
+    //TODO: Fix
+
+    /*
     this.auth.login(user, password).then(() => {
       this.sync();
       this.showSuccessDialog("login was successfull", "Welcome back 😀 <br> Your vocabularies are synced at the moment ↺. This can take a bit ⏲");
@@ -74,7 +77,7 @@ export class LoginToSyncComponent implements OnInit {
       } else {
         this.showErrorDialog("login was not successfull");
       }
-    })
+    })*/
   }
 
   private validateInput(user: string, password: string) :boolean {
