@@ -1,27 +1,28 @@
 <h1 mat-dialog-title>Check your information</h1>
 <div mat-dialog-content>
-  <table style="overflow-x: auto">
-    <tr>
-      <td><app-var-primary-language></app-var-primary-language>:</td>
-      <td>{{data.voc.primary_language}}</td>
-    </tr>
+    <table style="overflow-x: auto">
+        <tr>
+            <td><app-var-primary-language></app-var-primary-language>:</td>
+            <td>{{data.voc.primary_language}}</td>
+        </tr>
+        <br>
+        <tr>
+            <td>Your input:</td>
+            <td>{{data.userInput}} </td>
+        </tr>
+        <br>
+        <tr>
+            <td>Solution:</td>
+            <td>{{data.voc.secondary_language}} </td>
+        </tr>
+    </table>
     <br>
-    <tr>
-      <td>Your input:</td>
-      <td>{{data.userInput}} </td>
-    </tr>
-    <br>
-    <tr>
-      <td>Solution:</td>
-      <td>{{data.voc.secondary_language}} </td>
-    </tr>
-  </table>
-  <br>
-  <p [hidden]="!correct">Your information was correct, congratulations</p>
-  <p [hidden]="correct">Sadly, your information was wrong</p>
+    <p [hidden]="!correct">Your information was correct, congratulations</p>
+    <p [hidden]="correct">Sadly, your information was wrong</p>
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button style="margin-left: 0px;" (click)="okClicked()">Ok</button>
-  <button mat-button style="margin-left: 0px;" *ngIf="!correct" (click)="correctClicked()">Nevertheless correct</button>
+    <button mat-button style="margin-left: 0px;" (click)="okClicked()">Ok</button>
+    <button mat-button style="margin-left: 0px;" *ngIf="!correct" (click)="correctClicked()">Nevertheless
+        correct</button>
 </div>

@@ -1,17 +1,17 @@
 <h1 mat-dialog-title>Add Vocabulary to Class {{voc.class}} / Unit {{voc.unit}}</h1>
 <div mat-dialog-content>
-  <p><app-var-primary-language></app-var-primary-language></p>
-  <mat-form-field>
-    <input required matInput [(ngModel)]="voc.primary_language" autocorrect='off' cdkFocusInitial>
-  </mat-form-field>
+    <p><app-var-primary-language></app-var-primary-language></p>
+    <mat-form-field>
+        <input required matInput [(ngModel)]="voc.primary_language" autocorrect='off' cdkFocusInitial>
+    </mat-form-field>
 
-  <br>
-  <p><app-var-secondary-language></app-var-secondary-language></p>
-  <mat-form-field>
-    <input required matInput [(ngModel)]="voc.secondary_language" autocorrect='off' cdkFocusInitial>
-  </mat-form-field>
+    <br>
+    <p><app-var-secondary-language></app-var-secondary-language></p>
+    <mat-form-field>
+        <input required matInput [(ngModel)]="voc.secondary_language" autocorrect='off' cdkFocusInitial>
+    </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="cancelClicked()">Cancel</button>
-  <button mat-button (click)="okClicked()">Ok</button>
+    <button mat-button (click)="cancelClicked()">Cancel</button>
+    <button mat-button (click)="okClicked()">Ok</button>
 </div>

@@ -1,6 +1,6 @@
 <app-button-back></app-button-back>
 <div style="width: 50%; float: left;">
-  <span class="headerText">Search</span>
+    <span class="headerText">Search</span>
 </div>
 
 <div style='clear: both;'>
@@ -8,30 +8,30 @@
 
 <br>
 <div class="buttonOutline">
-  <div class="buttonOutlineText" autocorrect='off' contenteditable="true" spellcheck="false"
-    data-placeholder="Search Text" id="SearchText"></div>
+    <div class="buttonOutlineText" autocorrect='off' contenteditable="true" spellcheck="false"
+        data-placeholder="Search Text" id="SearchText"></div>
 </div>
 
 <br>
 <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col"><app-var-primary-language></app-var-primary-language></th>
-      <th scope="col"><app-var-secondary-language></app-var-secondary-language></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let voc of filteredVocs; let i = index" (click)="vocPressed(voc)">
-      <th scope="row">{{i + 1}}</th>
-      <td>{{voc.primary_language}}</td>
-      <td>{{voc.secondary_language}}</td>
-    </tr>
-  </tbody>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col"><app-var-primary-language></app-var-primary-language></th>
+            <th scope="col"><app-var-secondary-language></app-var-secondary-language></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let voc of filteredVocs; let i = index" (click)="vocPressed(voc)">
+            <th scope="row">{{i + 1}}</th>
+            <td>{{voc.primary_language}}</td>
+            <td>{{voc.secondary_language}}</td>
+        </tr>
+    </tbody>
 </table>
 
 <script type="text/javascript">
-  window.onload = function () {
-    document.getElementById("SearchText").focus();
-  };
+    window.onload = function () {
+        document.getElementById("SearchText").focus();
+    };
 </script>

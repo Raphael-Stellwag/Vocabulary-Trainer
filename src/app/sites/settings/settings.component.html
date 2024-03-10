@@ -1,6 +1,6 @@
 <app-button-back></app-button-back>
 <div style="width: 50%; float: left;">
-  <span class="headerText">Settings</span>
+    <span class="headerText">Settings</span>
 </div>
 
 <div style='clear: both;'>
@@ -8,92 +8,92 @@
 <br>
 
 <div>
-  <span class="buttonHeader">Primary Language</span>
-  <div class="buttonOutline">
-    <div class="buttonOutlineText"><app-var-primary-language #VarPrimaryLanguage
-        [editable]="true"></app-var-primary-language></div>
-  </div>
+    <span class="buttonHeader">Primary Language</span>
+    <div class="buttonOutline">
+        <div class="buttonOutlineText"><app-var-primary-language #VarPrimaryLanguage
+                [editable]="true"></app-var-primary-language></div>
+    </div>
 </div>
 <br>
 
 <div>
-  <span class="buttonHeader">Secondary Language</span>
-  <div class="buttonOutline">
-    <div class="buttonOutlineText"><app-var-secondary-language #VarSecondaryLanguage
-        [editable]="true"></app-var-secondary-language></div>
-  </div>
+    <span class="buttonHeader">Secondary Language</span>
+    <div class="buttonOutline">
+        <div class="buttonOutlineText"><app-var-secondary-language #VarSecondaryLanguage
+                [editable]="true"></app-var-secondary-language></div>
+    </div>
 </div>
 <br>
 
 <div class="button" (click)="saveButtonPressed()" (keypress)="saveButtonPressed()" tabindex="0">
-  <span class="buttonText">
-    Save
-  </span>
+    <span class="buttonText">
+        Save
+    </span>
 </div>
 <br>
 
 <div class="button">
-  <div style="width: 50%; position: relative; float: left;" (click)="chooseFileToImport()">
-    <span class="buttonText">
-      <div style="height: 0px; width: 0px; overflow: hidden;"><input id="importFile" type="file" value="importFile"
-          accept="application/json"></div>
-      Import
-      <!--<i class="material-icons" style="line-height: 32px; bottom: 0px">cloud_download</i>-->
-    </span>
-    <div style="width: 1px; height:100%; background-color: white; float: right; position: absolute;"></div>
-  </div>
-  <div style="width: 50%; position: relative; float: right;" (click)="chooseVocabularyToExport()"
-    (keypress)="chooseVocabularyToExport()" tabindex="0">
-    <div style="width: 1px; height:100%; background-color: white; float: left; position: absolute;"></div>
-    <span class="buttonText">
-      Export
-      <!--<i class="material-icons" style="line-height: 32px; bottom: 0px">cloud_download</i>-->
-    </span>
-  </div>
+    <div style="width: 50%; position: relative; float: left;" (click)="chooseFileToImport()">
+        <span class="buttonText">
+            <div style="height: 0px; width: 0px; overflow: hidden;"><input id="importFile" type="file"
+                    value="importFile" accept="application/json"></div>
+            Import
+            <!--<i class="material-icons" style="line-height: 32px; bottom: 0px">cloud_download</i>-->
+        </span>
+        <div style="width: 1px; height:100%; background-color: white; float: right; position: absolute;"></div>
+    </div>
+    <div style="width: 50%; position: relative; float: right;" (click)="chooseVocabularyToExport()"
+        (keypress)="chooseVocabularyToExport()" tabindex="0">
+        <div style="width: 1px; height:100%; background-color: white; float: left; position: absolute;"></div>
+        <span class="buttonText">
+            Export
+            <!--<i class="material-icons" style="line-height: 32px; bottom: 0px">cloud_download</i>-->
+        </span>
+    </div>
 </div>
 <br>
 
 <div *ngIf="userId == null">
-  <div class="button" (click)="login()">
-    <span class="buttonText">
-      Login to Sync
-    </span>
-  </div>
+    <div class="button" (click)="login()">
+        <span class="buttonText">
+            Login to Sync
+        </span>
+    </div>
 </div>
 <div *ngIf="userId != null">
-  <span class="buttonHeader">Logged in as {{userId}}</span>
-  <div class="button" (click)="sync()">
-    <span class="buttonText">
-      Sync Vocabularies
-    </span>
-  </div>
+    <span class="buttonHeader">Logged in as {{userId}}</span>
+    <div class="button" (click)="sync()">
+        <span class="buttonText">
+            Sync Vocabularies
+        </span>
+    </div>
 </div>
 <br>
 
 <div>
-  <div class="button" (click)="deleteAllVocs()">
-    <span class="buttonText">
-      Delete All Vocabularies
-    </span>
-  </div>
+    <div class="button" (click)="deleteAllVocs()">
+        <span class="buttonText">
+            Delete All Vocabularies
+        </span>
+    </div>
 </div>
 <br>
 
 <a routerLink="/settings/impressum" style="text-decoration:none;">
-  <div class="button">
-    <span class="buttonText">
-      Impressum
-    </span>
-  </div>
+    <div class="button">
+        <span class="buttonText">
+            Impressum
+        </span>
+    </div>
 </a>
 <br>
 
 <div>
-  <span class="buttonHeader">Version {{version}}</span>
+    <span class="buttonHeader">Version {{version}}</span>
 </div>
 
 <script type="text/javascript">
-  window.onload = function () {
-    document.getElementById("PrimaryLanguage").focus();
-  };
+    window.onload = function () {
+        document.getElementById("PrimaryLanguage").focus();
+    };
 </script>

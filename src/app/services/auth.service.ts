@@ -5,27 +5,27 @@ import { KeycloakService } from 'keycloak-angular';
 @Injectable()
 export class AuthService {
 
-  constructor(private keycloakService: KeycloakService) {
-  }
+    constructor(private keycloakService: KeycloakService) {
+    }
 
-  async isLoggedIn(): Promise<boolean> {
-    return await this.keycloakService.isLoggedIn();
-  }
+    async isLoggedIn(): Promise<boolean> {
+        return await this.keycloakService.isLoggedIn();
+    }
 
-  async logout() {
-    await this.keycloakService.logout();
-  }
+    async logout() {
+        await this.keycloakService.logout();
+    }
 
-  getUsername(): string {
-    return this.keycloakService.getUsername();
-  }
+    getUsername(): string {
+        return this.keycloakService.getUsername();
+    }
 
-  async getAuthToken() {
-    return await this.keycloakService.getToken()
-  }
+    async getAuthToken() {
+        return await this.keycloakService.getToken()
+    }
 
-  async login(): Promise<boolean> {
-    await this.keycloakService.login();
-    return this.isLoggedIn();
-  }
+    async login(): Promise<boolean> {
+        await this.keycloakService.login();
+        return this.isLoggedIn();
+    }
 }

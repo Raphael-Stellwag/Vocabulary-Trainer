@@ -1,16 +1,16 @@
 <app-button-back></app-button-back>
 <div style="width: 50%; float: left;">
-	<span class="headerText">Change</span>
+    <span class="headerText">Change</span>
 </div>
 <div (click)="addClicked()" (keypress)="addClicked()"
-	style="cursor: pointer; width: 25%; float: left;  top:7px; position:relative" tabindex="0">
-	<span
-		style="font-family: Montserrat;font-style: normal;font-weight: normal;line-height: normal;font-size: 26px;line-height: 32px;vertical-align: middle;display: inline-flex;">
-		<div class="content-desktop">
-			Add
-		</div>
-		<i class="material-icons" style=" line-height: 32px;font-size: 32px;">add</i>
-	</span>
+    style="cursor: pointer; width: 25%; float: left;  top:7px; position:relative" tabindex="0">
+    <span
+        style="font-family: Montserrat;font-style: normal;font-weight: normal;line-height: normal;font-size: 26px;line-height: 32px;vertical-align: middle;display: inline-flex;">
+        <div class="content-desktop">
+            Add
+        </div>
+        <i class="material-icons" style=" line-height: 32px;font-size: 32px;">add</i>
+    </span>
 </div>
 
 <div style='clear: both;'>
@@ -18,24 +18,24 @@
 
 <br>
 <table class="table">
-	<thead>
-		<tr>
-			<th scope="col">#</th>
-			<th scope="col"><app-var-primary-language></app-var-primary-language></th>
-			<th scope="col"><app-var-secondary-language></app-var-secondary-language></th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr *ngFor="let voc of vocs.data; let i = index" (click)="vocPressed(voc)">
-			<th scope="row">{{i + 1}}</th>
-			<td>{{voc.primary_language}}</td>
-			<td>{{voc.secondary_language}}</td>
-		</tr>
-	</tbody>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col"><app-var-primary-language></app-var-primary-language></th>
+            <th scope="col"><app-var-secondary-language></app-var-secondary-language></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let voc of vocs.data; let i = index" (click)="vocPressed(voc)">
+            <th scope="row">{{i + 1}}</th>
+            <td>{{voc.primary_language}}</td>
+            <td>{{voc.secondary_language}}</td>
+        </tr>
+    </tbody>
 </table>
 
 <script type="text/javascript">
-	window.onload = function () {
-		document.getElementById("PrimaryLanguage").focus();
-	};
+    window.onload = function () {
+        document.getElementById("PrimaryLanguage").focus();
+    };
 </script>

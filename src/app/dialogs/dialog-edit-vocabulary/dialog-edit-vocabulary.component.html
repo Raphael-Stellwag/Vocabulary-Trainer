@@ -1,26 +1,26 @@
 <h1 mat-dialog-title>Edit Vocabulary</h1>
 <div mat-dialog-content>
-  <p>Class:</p>
-  <mat-form-field>
-    <input required matInput [(ngModel)]="voc.class" cdkFocusInitial>
-  </mat-form-field>
-  <br>
-  <p>Unit:</p>
-  <mat-form-field>
-    <input required matInput [(ngModel)]="voc.unit">
-  </mat-form-field>
-  <br>
-  <p><app-var-primary-language></app-var-primary-language>:</p>
-  <mat-form-field>
-    <input required matInput [(ngModel)]="voc.primary_language">
-  </mat-form-field>
-  <br>
-  <p><app-var-secondary-language></app-var-secondary-language>:</p>
-  <mat-form-field>
-    <input required matInput [(ngModel)]="voc.secondary_language">
-  </mat-form-field>
+    <p>Class:</p>
+    <mat-form-field>
+        <input required matInput [(ngModel)]="voc.class" cdkFocusInitial>
+    </mat-form-field>
+    <br>
+    <p>Unit:</p>
+    <mat-form-field>
+        <input required matInput [(ngModel)]="voc.unit">
+    </mat-form-field>
+    <br>
+    <p><app-var-primary-language></app-var-primary-language>:</p>
+    <mat-form-field>
+        <input required matInput [(ngModel)]="voc.primary_language">
+    </mat-form-field>
+    <br>
+    <p><app-var-secondary-language></app-var-secondary-language>:</p>
+    <mat-form-field>
+        <input required matInput [(ngModel)]="voc.secondary_language">
+    </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="cancelClicked()">Cancel</button>
-  <button mat-button (click)="editClicked()">Edit</button>
+    <button mat-button (click)="cancelClicked()">Cancel</button>
+    <button mat-button (click)="editClicked()">Edit</button>
 </div>

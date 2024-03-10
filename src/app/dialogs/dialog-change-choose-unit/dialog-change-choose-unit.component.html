@@ -1,23 +1,23 @@
 <h1 mat-dialog-title>Choose Class and Unit</h1>
 <div mat-dialog-content>
-  <p>Which class you want to edit?</p>
-  <mat-form-field>
-    <input required matInput [(ngModel)]="data.class" [matAutocomplete]="autoClas" (ngModelChange)="classChanged()"
-      cdkFocusInitial>
-  </mat-form-field>
-  <mat-autocomplete #autoClas="matAutocomplete">
-    <mat-option *ngFor="let option of classOptions" [value]="option.class">{{option.class}}</mat-option>
-  </mat-autocomplete>
-  <br>
-  <p>Which unit you want to edit?</p>
-  <mat-form-field>
-    <input required matInput [(ngModel)]="data.unit" [matAutocomplete]="autoUnit" (ngModelChange)="unitChanged()">
-  </mat-form-field>
-  <mat-autocomplete #autoUnit="matAutocomplete">
-    <mat-option *ngFor="let option2 of unitOptions" [value]="option2.unit">{{option2.unit}}</mat-option>
-  </mat-autocomplete>
+    <p>Which class you want to edit?</p>
+    <mat-form-field>
+        <input required matInput [(ngModel)]="data.class" [matAutocomplete]="autoClas" (ngModelChange)="classChanged()"
+            cdkFocusInitial>
+    </mat-form-field>
+    <mat-autocomplete #autoClas="matAutocomplete">
+        <mat-option *ngFor="let option of classOptions" [value]="option.class">{{option.class}}</mat-option>
+    </mat-autocomplete>
+    <br>
+    <p>Which unit you want to edit?</p>
+    <mat-form-field>
+        <input required matInput [(ngModel)]="data.unit" [matAutocomplete]="autoUnit" (ngModelChange)="unitChanged()">
+    </mat-form-field>
+    <mat-autocomplete #autoUnit="matAutocomplete">
+        <mat-option *ngFor="let option2 of unitOptions" [value]="option2.unit">{{option2.unit}}</mat-option>
+    </mat-autocomplete>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="cancelClicked()">Cancel</button>
-  <button mat-button (click)="okClicked()" [disabled]="!classChosen || !unitChosen">Ok</button>
+    <button mat-button (click)="cancelClicked()">Cancel</button>
+    <button mat-button (click)="okClicked()" [disabled]="!classChosen || !unitChosen">Ok</button>
 </div>

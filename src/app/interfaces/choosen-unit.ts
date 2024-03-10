@@ -1,4 +1,4 @@
 export interface ChoosenUnit {
-  clas: string;
-  unit: string;
+    clas: string;
+    unit: string;
 }
